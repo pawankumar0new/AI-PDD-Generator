@@ -1,0 +1,573 @@
+/* ── VillageProfile ─────────────────────────────────────────────────────────── */
+
+/* ── Page entrance animation ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.village-profile-root {
+  animation: fadeInUp 0.25s ease;
+  font-family: 'DM Sans', 'Outfit', sans-serif;
+}
+
+/* ════════════════════════════════════
+   HEADER CARD
+   ════════════════════════════════════ */
+/* ── Icon box ── */
+/* TODO PAWAN: Ensure removal if not usable */
+.vp-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* from-blue-500 to-blue-800 */
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3); /* shadow-xl shadow-blue-500/30 */
+}
+
+
+/* ── Subtitle ── */
+.vp-subtitle {
+  font-size: 12.5px;
+  color: #78716c; /* stone-500 */
+  margin: 0;
+}
+
+.vp-subtitle-village {
+  font-weight: 700;
+  color: #44403c; /* stone-700 */
+  background: #f5f5f4; /* stone-100 */
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+/* ── Header right / progress ── */
+.vp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vp-progress-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vp-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.vp-progress-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #78716c; /* stone-500 */
+}
+
+.vp-progress-label-icon {
+  color: #3b82f6; /* blue-500 */
+}
+
+.vp-progress-pct {
+  font-size: 12px;
+  font-weight: 900;
+  color: #2563eb; /* blue-600 */
+}
+
+.vp-progress-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vp-progress-count {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #a8a29e; /* stone-400 */
+  font-variant-numeric: tabular-nums;
+  width: 40px;
+  text-align: right;
+}
+
+.vp-progress-track {
+  width: 128px;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f5f5f4; /* stone-100 */
+}
+
+.vp-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  /* from-blue-400 to-indigo-400 */
+  background: linear-gradient(to right, #60a5fa, #818cf8);
+  transition: width 0.7s ease;
+}
+
+/* ════════════════════════════════════
+   DOCUMENT VIEW
+   ════════════════════════════════════ */
+
+/* ── Document top strip ── */
+/* TODO PAWan: ensure removal if not usable */
+.vp-doc-strip {
+  padding: 16px 32px;
+  /* from-stone-50 to-white */
+  background: linear-gradient(to right, #fafaf9, #ffffff);
+  border-bottom: 1px solid #f5f5f4; /* stone-100 */
+}
+
+.vp-doc-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vp-doc-sec-badge {
+  font-size: 10px;
+  font-weight: 900;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-family: monospace;
+  /* from-blue-50 to-indigo-50 */
+  background: linear-gradient(135deg, #eff6ff, #eef2ff);
+  color: #1d4ed8; /* blue-700 */
+  border: 1px solid rgba(147, 197, 253, 0.6); /* blue-200/60 */
+}
+
+.vp-doc-sec-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #78716c; /* stone-500 */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ════════════════════════════════════
+   FIELD BLOCK
+   ════════════════════════════════════ */
+.field-block-vp {
+  margin-bottom: 32px;
+}
+
+.field-block-vp:last-child {
+  margin-bottom: 8px;
+}
+
+/* ── Field heading row ── */
+.field-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+
+
+.field-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Edit button ── */
+.btn-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #3b82f6, #1e40af);
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.btn-edit:hover {
+  opacity: 0.9;
+}
+
+/* ── Cancel button ── */
+.btn-cancel-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #6b7280, #374151);
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.btn-cancel-edit:hover {
+  opacity: 0.9;
+}
+
+/* ── Save button ── */
+.btn-save-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #22c55e, #15803d);
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.btn-save-edit:hover {
+  opacity: 0.9;
+}
+
+/* ── Read-mode content ── */
+.field-read-content {
+  transition: opacity 0.2s ease;
+}
+
+.field-read-content--empty {
+  opacity: 0.4;
+}
+
+
+
+.field-read-p:last-child {
+  margin-bottom: 0;
+}
+
+
+
+.field-read-empty-hint {
+  font-size: 13px;
+  font-style: italic;
+  color: #a8a29e; /* stone-400 */
+  line-height: 1.6;
+}
+
+/* ════════════════════════════════════
+   INLINE FIELD EDITOR (TipTap wrapper)
+   ════════════════════════════════════ */
+.inline-field-editor {
+  margin-top: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(96, 165, 250, 0.5); /* blue-400/50 */
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1); /* shadow-lg shadow-blue-500/10 */
+  font-family: 'DM Sans', 'Outfit', sans-serif;
+}
+
+/* ── Toolbar ── */
+.ife-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #f5f5f4; /* stone-100 */
+  background: rgba(250, 250, 249, 0.8); /* stone-50/80 */
+}
+
+/* ── Toolbar button ── */
+.ife-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s ease, color 0.12s ease;
+  background: transparent;
+  color: #57534e; /* stone-500 */
+}
+
+.ife-btn:hover:not(:disabled) {
+  background: rgba(231, 229, 228, 0.7); /* stone-200/70 */
+  color: #1c1917; /* stone-800 */
+}
+
+.ife-btn--active {
+  background: #3b82f6; /* blue-500 */
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(59, 130, 246, 0.3);
+}
+
+.ife-btn--active:hover {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.ife-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Separator ── */
+.ife-sep {
+  width: 1px;
+  height: 16px;
+  background: #e7e5e4; /* stone-200 */
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* ── Label ── */
+.ife-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #a8a29e; /* stone-400 */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 2px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ── Colour swatch button ── */
+.ife-color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px #ccc;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.ife-color-swatch:hover {
+  transform: scale(1.1);
+}
+
+/* ── Remove colour button ── */
+.ife-color-remove {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid #d6d3d1; /* stone-300 */
+  background: #ffffff;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 700;
+  color: #a8a29e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s ease;
+}
+
+.ife-color-remove:hover {
+  background: #f5f5f4;
+}
+
+/* ── Hidden file input ── */
+.ife-file-input {
+  display: none;
+}
+
+/* ── Editor body ── */
+.tiptap-simple {
+  padding: 24px;
+  min-height: 200px;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #1c1917;
+}
+
+.tiptap-simple:focus {
+  outline: none;
+}
+
+/* ── Generate All button (TipTap toolbar) ── */
+.btn-generate-all-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #3b82f6, #1e40af);
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.btn-generate-all-toolbar:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-generate-all-toolbar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ── TipTap table styles ── */
+/* ── TipTap table styles — PDF report style ── */
+.tiptap-simple .ProseMirror table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.tiptap-simple .ProseMirror th {
+  background: #1b87ec;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 14px;
+  border: none;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+}
+
+.tiptap-simple .ProseMirror th p,
+.tiptap-simple .ProseMirror th p *,
+.inline-field-editor .ProseMirror th p,
+.inline-field-editor .ProseMirror th p * {
+  color: #ffffff !important;
+  margin: 0;
+  padding: 0;
+}
+.tiptap-simple .ProseMirror th:last-child {
+  border-right: none;
+}
+
+.tiptap-simple .ProseMirror td {
+  padding: 8px 14px;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: middle;
+  text-align: center;
+  color: #1a1a2e;
+}
+
+.tiptap-simple .ProseMirror td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #1a3e74;
+}
+
+.tiptap-simple .ProseMirror td:last-child {
+  border-right: none;
+}
+
+.tiptap-simple .ProseMirror tr:nth-child(odd) td {
+  background: #ffffff;
+}
+
+.tiptap-simple .ProseMirror tr:nth-child(even) td {
+  background: #f0f4f8;
+}
+
+.tiptap-simple .ProseMirror tr:last-child td {
+  background: #e8f0fb;
+  font-weight: 700;
+  color: #1a3e74;
+  border-top: 2px solid #1b87ec;
+}
+
+.tiptap-simple .ProseMirror .selectedCell::after {
+  background: rgba(27, 135, 236, 0.12);
+}
+/* ── Read-mode table styles ── */
+/* ── Read-mode table styles — PDF report style ── */
+.field-read-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.field-read-content th {
+  background: #1b87ec;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 14px;
+  border: none;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+}
+
+.field-read-content th:last-child {
+  border-right: none;
+}
+
+.field-read-content td {
+  padding: 8px 14px;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: middle;
+  text-align: center;
+  color: #1a1a2e;
+}
+
+.field-read-content td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #1a3e74;
+}
+
+.field-read-content td:last-child {
+  border-right: none;
+}
+
+.field-read-content tr:nth-child(odd) td {
+  background: #ffffff;
+}
+
+.field-read-content tr:nth-child(even) td {
+  background: #f0f4f8;
+}
+
+.field-read-content tr:last-child td {
+  background: #e8f0fb;
+  font-weight: 700;
+  color: #1a3e74;
+  border-top: 2px solid #1b87ec;
+}

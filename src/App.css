@@ -1,0 +1,457 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+/* ── SPVO Design System Variables ─────────────────────────────────────────── */
+:root {
+  --primary:        #00529d;
+  --primary-hover:  #003f7a;
+  --primary-dark:   #1a3e74;
+  --font-sans:      'Nunito', sans-serif;
+  --font-mono:      'IBM Plex Mono', monospace;
+
+  --bg:             #f4f6f9;
+  --surface:        #ffffff;
+  --border:         #dee2e6;
+  --border-strong:  #adb5bd;
+  --text-primary:   #1a1a2e;
+  --text-secondary: #495057;
+  --text-muted:     #868e96;
+  --shadow:         rgba(0,0,0,0.06);
+  --radius-lg:      0.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+}
+
+/* ── SPVO btn system ──────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, opacity 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  box-shadow: 0 2px 8px rgba(0, 82, 157, 0.3);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--text-secondary);
+  border-color: var(--border-strong);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: #f8f9fa;
+  border-color: #868e96;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+/* ── SPVO intro-y box ─────────────────────────────────────────────────────── */
+.intro-y {
+  animation: fadeSlideIn 0.25s ease both;
+}
+
+.box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+.app { min-height: 100vh; }
+
+.main-content {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 84px 28px 60px;
+}
+
+/* Page Hero */
+.page-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid var(--border);
+}
+.hero-left { flex: 1; }
+.hero-title {
+  display: flex;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--primary-dark);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.hero-desc {
+  display: flex;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Village Selector */
+.select-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 460px;
+}
+
+.village-select {
+  width: 100%;
+  appearance: none;
+  padding: 8px 36px 8px 12px;
+  background: #fff;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.village-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 82, 157, 0.15);
+}
+
+.select-chevron {
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Empty State */
+.empty-state { margin-top: 12px; }
+
+.empty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  opacity: 0.45;
+}
+
+.empty-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  animation: fadeSlideIn 0.4s ease both;
+}
+
+.empty-card-bar {
+  height: 10px;
+  background: linear-gradient(90deg, var(--border) 25%, #e9ecef 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+.empty-card-bar.short  { width: 60%; }
+.empty-card-bar.medium { width: 80%; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.empty-text {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.content-area { animation: fadeSlideIn 0.3s ease; }
+
+/* ── TipTap editor ────────────────────────────────────────────────────────── */
+.tiptap-simple .ProseMirror {
+  min-height: 520px;
+  padding: 20px 24px;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.8;
+  text-align: left;
+  color: #212529;
+}
+
+.tiptap-simple .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #adb5bd;
+  font-style: italic;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.tiptap-simple .ProseMirror strong { font-weight: 700; }
+.tiptap-simple .ProseMirror em     { font-style: italic; color: #6c757d; }
+
+.tiptap-simple .ProseMirror ul  { list-style-type: disc; padding-left: 56px; margin: 6px 0 10px; }
+.tiptap-simple .ProseMirror ol  { list-style-type: decimal; padding-left: 56px; margin: 6px 0 10px; }
+.tiptap-simple .ProseMirror li  { padding-left: 4px; margin: 4px 0; }
+.tiptap-simple .ProseMirror hr  { border: none; border-top: 2px solid #dee2e6; margin: 16px 0; }
+
+/* Task list */
+.tiptap-simple .ProseMirror ul[data-type="taskList"] { list-style: none; padding-left: 4px; }
+.tiptap-simple .ProseMirror ul[data-type="taskList"] li { display: flex; align-items: flex-start; gap: 8px; }
+.tiptap-simple .ProseMirror ul[data-type="taskList"] li > label { margin-top: 2px; flex-shrink: 0; }
+.tiptap-simple .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--primary); cursor: pointer; }
+
+/* Blockquote */
+.tiptap-simple .ProseMirror blockquote {
+  border-left: 3px solid var(--primary);
+  margin: 10px 0;
+  padding: 6px 16px;
+  background: #e8f0fb;
+  border-radius: 0 4px 4px 0;
+  color: var(--primary-dark);
+  font-style: italic;
+}
+
+/* Code block */
+.tiptap-simple .ProseMirror pre {
+  background: #1a3e74;
+  color: #e8f0fb;
+  border-radius: 6px;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 10px 0;
+  overflow-x: auto;
+}
+.tiptap-simple .ProseMirror code {
+  background: #e8f0fb;
+  color: var(--primary-dark);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.tiptap-simple .ProseMirror pre code { background: none; color: inherit; padding: 0; }
+
+/* Images */
+/* ── Image size constraint ── */
+.tiptap-simple .ProseMirror img,
+.inline-field-editor .ProseMirror img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 12px auto;
+  display: block;
+}
+
+/* Links */
+.tiptap-simple .ProseMirror a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.tiptap-simple .ProseMirror a:hover { color: var(--primary-dark); }
+
+/* Highlight */
+.tiptap-simple .ProseMirror mark { border-radius: 2px; padding: 0 2px; }
+
+/* Text alignment */
+.tiptap-simple .ProseMirror [style*="text-align: center"]  { text-align: center; }
+.tiptap-simple .ProseMirror [style*="text-align: right"]   { text-align: right; }
+.tiptap-simple .ProseMirror [style*="text-align: justify"] { text-align: justify; }
+
+/* Headings — SPVO structured document style */
+.tiptap-simple .ProseMirror h1 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 18px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-left: 0;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 4px;
+}
+.tiptap-simple .ProseMirror h2 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 14px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding-left: 16px;
+}
+.tiptap-simple .ProseMirror h3 {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 10px 0 5px;
+  padding-left: 0px;
+  text-transform: none;
+}
+.tiptap-simple .ProseMirror h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 8px 0 4px;
+  padding-left: 32px;
+}
+.tiptap-simple .ProseMirror p {
+  font-size: 13.5px;
+  text-align: justify;
+  font-family: 'Inter', sans-serif;
+  margin: 0 0 8px;
+  padding-left: 12px;
+  color: rgb(68 64 60 / var(--tw-text-opacity, 1));
+}
+
+/* Inline field editor */
+.inline-field-editor .ProseMirror {
+  min-height: 100px;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #212529;
+}
+/* .inline-field-editor .ProseMirror p {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #44403c;
+  margin: 0 0 12px;
+  padding-left: 12px;
+  text-align: justify;
+}
+
+.inline-field-editor .ProseMirror h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: underline;
+  margin: 14px 0 4px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+} */
+.inline-field-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #ced4da;
+  font-style: italic;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+.inline-field-editor .ProseMirror strong { font-weight: 700; }
+.inline-field-editor .ProseMirror em     { font-style: italic; }
+
+/* ── PDD Content Container — unified scope for read view + TipTap editor ─── */
+/* ── PDD unified typography — read view + TipTap editor ─── */
+
+.pdd-content-container h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: normal;
+}
+
+.pdd-content-container,
+.pdd-content-container p,
+.pdd-content-container h1,
+.pdd-content-container h2,
+.pdd-content-container h3,
+.pdd-content-container h4 {
+  font-family: 'Inter', sans-serif;
+}
+
+.pdd-content-container h2,
+.pdd-content-container .inline-field-editor .ProseMirror h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0c0a09; /* stone-900 */
+  margin-top: 24px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+
+.pdd-content-container h3,
+.pdd-content-container .inline-field-editor .ProseMirror h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1d4ed8; /* blue-700 */
+  margin: 0;
+  letter-spacing: 0.025em;
+  padding-left: 12px;
+}
+
+/* Both read-mode p and TipTap p share identical type style */
+.pdd-content-container p,
+.pdd-content-container .inline-field-editor .ProseMirror p {
+  font-size: 14px;
+  line-height: 1.85;
+  text-align: justify;
+  color: #44403c;
+  margin: 0 0 12px;
+  padding-left: 12px;
+}
+
+/* Both read-mode h4 and TipTap h4 share identical type style */
+.pdd-content-container h4,
+.pdd-content-container .inline-field-editor .ProseMirror h4 {
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  color: #000000;
+  text-decoration: underline;
+  margin: 14px 0 4px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+}

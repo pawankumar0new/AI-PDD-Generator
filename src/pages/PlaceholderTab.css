@@ -1,0 +1,140 @@
+/* ── PlaceholderTab ─────────────────────────────────────────────────────────── */
+
+/* ── Header card ── */
+.placeholder-header-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-top: 3px solid #00529d;
+  font-family: inherit;
+}
+
+.placeholder-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.placeholder-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #00529d;
+  box-shadow: 0 8px 24px rgba(0, 82, 157, 0.3);
+}
+
+.placeholder-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a3e74;
+  margin: 0 0 2px;
+}
+
+/* ── Progress indicator (shown while generating) ── */
+.placeholder-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.placeholder-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.placeholder-progress-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555555;
+}
+
+.placeholder-progress-pct {
+  font-size: 12px;
+  font-weight: 700;
+  color: #00529d;
+}
+
+.placeholder-progress-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.placeholder-progress-count {
+  font-size: 12px;
+  color: #888888;
+  font-variant-numeric: tabular-nums;
+  width: 36px;
+  text-align: right;
+}
+
+.placeholder-progress-bar-track {
+  width: 128px;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e9ecef;
+}
+
+.placeholder-progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #00529d;
+  transition: width 0.7s ease;
+}
+
+/* ── Empty state (when no content yet, not used currently but kept for reference) ── */
+.placeholder-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  text-align: center;
+  padding: 48px 32px;
+  border: 2px dashed #dee2e6;
+  border-radius: 16px;
+  background: #f8f9fa;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.placeholder-desc {
+  font-size: 14px;
+  color: #888888;
+  max-width: 440px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.placeholder-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: #e8f0fb;
+  color: #1a3e74;
+  border: 1px solid #1a3e74;
+}

@@ -1,0 +1,236 @@
+/* ── FieldSelector ──────────────────────────────────────────────────────────── */
+.field-selector {
+  font-family: inherit;
+}
+
+/* ── Sections list ── */
+.fs-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* ── Section card ── */
+.fs-section {
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+  background: #ffffff;
+}
+
+/* ── Section header ── */
+.fs-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+  gap: 12px;
+  transition: background 0.15s ease;
+}
+
+.fs-section-header--expanded {
+  background: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.fs-section-header--collapsed {
+  background: #ffffff;
+}
+
+.fs-section-header:hover {
+  background: #f1f3f5;
+}
+
+/* ── Section header left group ── */
+.fs-section-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Custom checkbox ── */
+.fs-custom-checkbox {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fs-custom-checkbox--checked,
+.fs-custom-checkbox--partial {
+  background: #00529d;
+  border: 2px solid #00529d;
+}
+
+.fs-custom-checkbox--unchecked {
+  background: #ffffff;
+  border: 2px solid #adb5bd;
+}
+
+/* ── Section badge (ID pill) ── */
+.fs-section-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  font-family: monospace;
+  background: #e8f0fb;
+  color: #1a3e74;
+  border: 1px solid #b8cce8;
+}
+
+/* ── Section title ── */
+.fs-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a3e74;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Section header right group ── */
+.fs-section-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.fs-section-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666666;
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-collapse-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* ── Fields list ── */
+.fs-fields {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #ffffff;
+}
+
+/* ── Individual field row ── */
+.fs-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.1s ease;
+}
+
+.fs-field:hover {
+  background: #f1f3f5;
+}
+
+.fs-field--checked {
+  background: #e8f4fd;
+}
+
+.fs-field--checked:hover {
+  background: #d0eaf9;
+}
+
+.fs-field input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: #00529d;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.fs-field-label {
+  font-size: 14px;
+  color: #888888;
+  transition: color 0.1s ease;
+}
+
+.fs-field--checked .fs-field-label {
+  color: #1a1a1a;
+}
+
+/* ── Footer bar ── */
+.fs-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-top: 2px solid #00529d;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  border-top: 2px solid #00529d;
+}
+
+.fs-footer-info {
+  font-size: 14px;
+  color: #555555;
+}
+
+.fs-footer-info strong {
+  font-weight: 700;
+  color: #1a3e74;
+}
+
+.fs-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Save / continue button ── */
+.btn-continue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #3b82f6, #1e40af);
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.btn-continue:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-continue:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
