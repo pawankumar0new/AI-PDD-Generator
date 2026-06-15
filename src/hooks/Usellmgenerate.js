@@ -97,6 +97,8 @@ export function useLLMGenerate() {
         const json = JSON.parse(rawBody);
         if (typeof json === "string") {
           rawText = json;
+        } else if (json?.status === "success" && json?.analysis) {
+          rawText = collectTextBlocks(json.analysis).join("\n\n");
         } else if (typeof json?.result === "string") {
           rawText = json.result;
         } else if (typeof json?.text === "string") {
@@ -111,11 +113,38 @@ export function useLLMGenerate() {
           rawText = JSON.stringify(json, null, 2);
         }
       } catch {
-        // Response wasn't JSON — it's a raw plain-text blob, use it as-is
         rawText = rawBody;
       }
 
       const html = plainTextToHtml(rawText);
+      function isHeaderLike(str) {
+        const letters = str.replace(/[^a-zA-Z]/g, "");
+        return !letters || letters === letters.toUpperCase();
+      }
+
+      function collectTextBlocks(node, blocks = []) {
+        if (typeof node === "string") {
+          const trimmed = node.trim();
+          if (trimmed.split(/\s+/).length > 3 && !isHeaderLike(trimmed)) {
+            blocks.push(trimmed);
+          }
+          return blocks;
+        }
+        if (Array.isArray(node)) {
+          node.forEach((item) => collectTextBlocks(item, blocks));
+          return blocks;
+        }
+        if (node && typeof node === "object") {
+          Object.entries(node).forEach(([key, value]) => {
+            const trimmedKey = key.trim();
+            if (trimmedKey.split(/\s+/).length > 3 && !isHeaderLike(trimmedKey)) {
+              blocks.push(trimmedKey);
+            }
+            collectTextBlocks(value, blocks);
+          });
+        }
+        return blocks;
+      }
 
       setContent((prev) => ({
         ...prev,
