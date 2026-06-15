@@ -4,13 +4,34 @@ import PlaceholderTab from "./pages/PlaceholderTab";
 import VillageBackground from "./pages/VillageBackground";
 import VillageProfileSection from "./pages/VillageProfileSection";
 import SocialEnvironmental from "./pages/SocialEnvironmental";
-import { VILLAGES, TABS } from "./data/pddStructure";
+// import { VILLAGES, TABS } from "./data/pddStructure";
+import { useLLMGenerate } from "./hooks/useLLMGenerate";
 import { MapPin, ChevronDown } from "lucide-react";
+import { VILLAGES, TABS, VILLAGE_ID_MAP } from "./data/pddStructure";
 import "./App.css";
 
 export default function App() {
   const [selectedVillage, setSelectedVillage] = useState("");
   const [activeTab, setActiveTab] = useState(5);
+
+  // ── LLM state lifted here so content persists across tab switches ──────────
+  const { content, loading, errors, generateField, setFieldContent } = useLLMGenerate();
+  const handleGenerate = (fieldId, apiPayload) => {
+    const villageId = VILLAGE_ID_MAP[selectedVillage];
+    if (!villageId) {
+      console.error(`No village ID for ${selectedVillage}`);
+      return;
+    }
+    generateField(selectedVillage, fieldId, villageId, apiPayload);
+  };
+
+  
+  // Helpers scoped to the currently selected village
+  const villageContent = content[selectedVillage] || {};
+
+  const handleChange = (fieldId, html) => {
+    setFieldContent(selectedVillage, fieldId, html);
+  };
 
   const handleVillageChange = (e) => {
     setSelectedVillage(e.target.value);
@@ -20,16 +41,49 @@ export default function App() {
   const renderTabContent = () => {
     if (!selectedVillage) return null;
 
+    // ── Section 5: Village Background ────────────────────────────────────────
     if (activeTab === 5) {
-      return <VillageBackground village={selectedVillage} />;
-    }
-    if (activeTab === 6) {
-      return <VillageProfileSection village={selectedVillage} />;
-    }
-    if (activeTab === 7) {
-      return <SocialEnvironmental village={selectedVillage} />;
+      return (
+        <VillageBackground
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
     }
 
+    // ── Section 6: Village Profile ────────────────────────────────────────────
+    if (activeTab === 6) {
+      return (
+        <VillageProfileSection
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    // ── Section 7: Social & Environmental Integration ─────────────────────────
+    if (activeTab === 7) {
+      return (
+        <SocialEnvironmental
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    // ── All other sections: PlaceholderTab ────────────────────────────────────
     const tab = TABS.find((t) => t.id === activeTab);
     return (
       <PlaceholderTab

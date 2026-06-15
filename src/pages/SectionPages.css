@@ -602,3 +602,25 @@
   flex-shrink: 0;
   align-self: flex-start;
 }
+.village-satellite-image {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.village-satellite-image img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+/* ── Village satellite image sizing ── */
+.field-read-content img,
+.inline-field-editor .ProseMirror img,
+.tiptap-simple .ProseMirror img {
+  width: 95%;
+  max-width: 95%;
+  height: auto;
+  display: block;
+  margin: 16px auto;
+  border-radius: 4px;
+}

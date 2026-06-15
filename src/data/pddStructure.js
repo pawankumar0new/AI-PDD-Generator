@@ -1,4 +1,9 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// pddStructure.js
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const VILLAGES = [
+  "Bahadur khskheli-Fateh Pur",   // ← add this
   "Gaji Khan Panhwar",
   "Noor Muhammad Jaskani",
   "Ali Bux Khoso",
@@ -29,50 +34,366 @@ export const TABS = [
   { id: 20, label: "Section 20", shortLabel: "Section 20" },
 ];
 
+// ─────────────────────────────────────────────────────────────────────────────
+// VILLAGE PROFILE SECTIONS  (Section 6 — used by VillageProfileSection.jsx)
+// ─────────────────────────────────────────────────────────────────────────────
 export const VILLAGE_PROFILE_SECTIONS = [
   {
     id: "1.1",
     title: "1.1  THE VILLAGE CONTEXT",
     fields: [
-      { id: "admin_location", label: "Administrative Location & Access Map" },
-      { id: "settlement_pattern", label: "Settlement Pattern & Land Tenure" },
-      { id: "migration_history", label: "Migration / History of Settlement" },
+      { id: "admin_location",    label: "Administrative Location & Access Map",  sectionNumber: "1.1.1" },
+      { id: "settlement_pattern", label: "Settlement Pattern & Land Tenure",      sectionNumber: "1.1.2" },
+      { id: "migration_history", label: "Migration / History of Settlement",      sectionNumber: "1.1.3" },
     ],
   },
   {
     id: "1.2",
     title: "1.2  SOCIAL PROFILE",
     fields: [
-      { id: "demography", label: "Demography" },
-      { id: "livelihood", label: "Livelihood" },
-      { id: "education_profile", label: "Education Profile" },
-      { id: "health", label: "Health" },
-      { id: "infrastructure_access", label: "Infrastructure and Access" },
-      { id: "behavior_changes", label: "Behavior Changes" },
+      { id: "demography",           label: "Demography",                  sectionNumber: "1.2.1" },
+      { id: "livelihood",           label: "Livelihood",                  sectionNumber: "1.2.2" },
+      { id: "education_profile",    label: "Education Profile",           sectionNumber: "1.2.3" },
+      { id: "health",               label: "Health",                      sectionNumber: "1.2.4" },
+      { id: "infrastructure_access",label: "Infrastructure and Access",   sectionNumber: "1.2.5" },
+      { id: "behavior_changes",     label: "Behavior Changes",            sectionNumber: "1.2.6" },
     ],
   },
   {
     id: "1.3",
     title: "1.3  ENVIRONMENTAL PROFILE",
     fields: [
-      { id: "env_profile", label: "Environmental Profile" },
+      { id: "env_profile", label: "Environmental Profile", sectionNumber: "1.3.1" },
     ],
   },
   {
     id: "1.4",
     title: "1.4  WASH SITUATION IN THE VILLAGE",
     fields: [
-      { id: "water_supply_situation", label: "Water Supply Situation" },
-      { id: "sanitation_situation", label: "Sanitation Situation" },
-      { id: "hygiene_practices", label: "Hygiene Practices" },
-      { id: "solid_waste", label: "Solid Waste" },
-      { id: "drainage_grey_water", label: "Drainage and Grey Water" },
-      { id: "streets_access", label: "Streets and Access" },
+      { id: "water_supply_situation", label: "Water Supply Situation",  sectionNumber: "1.4.1" },
+      { id: "sanitation_situation",   label: "Sanitation Situation",    sectionNumber: "1.4.2" },
+      { id: "hygiene_practices",      label: "Hygiene Practices",       sectionNumber: "1.4.3" },
+      { id: "solid_waste",            label: "Solid Waste",             sectionNumber: "1.4.4" },
+      { id: "drainage_grey_water",    label: "Drainage and Grey Water", sectionNumber: "1.4.5" },
+      { id: "streets_access",         label: "Streets and Access",      sectionNumber: "1.4.6" },
     ],
   },
 ];
 
-// AI generation prompts per field
+// ─────────────────────────────────────────────────────────────────────────────
+// FIELD API PAYLOAD MAP
+// ─────────────────────────────────────────────────────────────────────────────
+// Maps every fieldId → the exact object sent in the `data` array of the POST
+// body to http://192.168.110.87:9000/api/v1/village/analyze
+//
+// Usage:
+//   import { FIELD_API_PAYLOAD } from "../data/pddStructure";
+//   const payload = FIELD_API_PAYLOAD["admin_location"];
+//   // → { section_no: "1", section_name: "Administrative Location & Access Map",
+//   //     sub_section_no: "1.1", sub_sub_section_no: "1.1.1" }
+//
+// ─────────────────────────────────────────────────────────────────────────────
+export const VILLAGE_ID_MAP = {
+  "Bahadur khskheli-Fateh Pur": "054ff8aa-285d-4e44-89bf-d91ada9da2ca", // ← add this (matches test payload)
+  "Bahadur Khaskheli": "054ff8aa-285d-4e44-89bf-d91ada9da2ca",
+  "Noor Muhammad Jaskani": "0ccc8851-61e3-4eb2-b007-1fcaf18d3233",
+  "Ali Bux Khoso": "replace-with-real-uuid",
+  "Muhammad Khan Morio": "replace-with-real-uuid",
+  "Ghulam Nabi Shar": "replace-with-real-uuid",
+};
+export const FIELD_API_PAYLOAD = {
+
+  // ── Section 5: Village Background and Location ──────────────────────────────
+  village_background: {
+    section_no: "5",
+    section_name: "Village Background and Location",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // ── Section 1.1: The Village Context ────────────────────────────────────────
+  admin_location: {
+    section_no: "1",
+    section_name: "The Village Context",
+    sub_section_no: "1.1",
+    sub_section_name: "The Village Context",
+    sub_sub_section_no: "1.1.1",
+    sub_sub_section_name: "Administrative Location & Access Map",
+  },
+  settlement_pattern: {
+    section_no: "1",
+    section_name: "The Village Context",
+    sub_section_no: "1.1",
+    sub_section_name: "The Village Context",
+    sub_sub_section_no: "1.1.2",
+    sub_sub_section_name: "Settlement Pattern & Land Tenure",
+  },
+  migration_history: {
+    section_no: "1",
+    section_name: "The Village Context",
+    sub_section_no: "1.1",
+    sub_section_name: "The Village Context",
+    sub_sub_section_no: "1.1.3",
+    sub_sub_section_name: "Migration / History of Settlement",
+  },
+
+  // ── Section 1.2: Social Profile ─────────────────────────────────────────────
+  demography: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.2",
+    sub_section_name: "Social Profile",
+    sub_sub_section_no: "1.2.1",
+    sub_sub_section_name: "Demography",
+  },
+  livelihood: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.2",
+    sub_section_name: "Social Profile",
+    sub_sub_section_no: "1.2.2",
+    sub_sub_section_name: "Livelihood",
+  },
+  education_profile: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.2",
+    sub_section_name: "Social Profile",
+    sub_sub_section_no: "1.2.3",
+    sub_sub_section_name: "Education Profile",
+  },
+  health: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.2",
+    sub_section_name: "Social Profile",
+    sub_sub_section_no: "1.2.4",
+    sub_sub_section_name: "Health",
+  },
+  infrastructure_access: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.2",
+    sub_section_name: "Social Profile",
+    sub_sub_section_no: "1.2.5",
+    sub_sub_section_name: "Infrastructure and Access",
+  },
+  behavior_changes: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.2",
+    sub_section_name: "Social Profile",
+    sub_sub_section_no: "1.2.6",
+    sub_sub_section_name: "Behavior Changes",
+  },
+
+  // ── Section 1.3: Environmental Profile ──────────────────────────────────────
+  env_profile: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.3",
+    sub_section_name: "Environmental Profile",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // ── Section 1.4: WASH Situation ──────────────────────────────────────────────
+  water_supply_situation: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.4",
+    sub_section_name: "WASH Situation in the Village",
+    sub_sub_section_no: "1.4.1",
+    sub_sub_section_name: "Water Supply Situation",
+  },
+  sanitation_situation: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.4",
+    sub_section_name: "WASH Situation in the Village",
+    sub_sub_section_no: "1.4.2",
+    sub_sub_section_name: "Sanitation Situation",
+  },
+  hygiene_practices: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.4",
+    sub_section_name: "WASH Situation in the Village",
+    sub_sub_section_no: "1.4.3",
+    sub_sub_section_name: "Hygiene Practices",
+  },
+  solid_waste: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.4",
+    sub_section_name: "WASH Situation in the Village",
+    sub_sub_section_no: "1.4.4",
+    sub_sub_section_name: "Solid Waste",
+  },
+  drainage_grey_water: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.4",
+    sub_section_name: "WASH Situation in the Village",
+    sub_sub_section_no: "1.4.5",
+    sub_sub_section_name: "Drainage and Grey Water",
+  },
+  streets_access: {
+    section_no: "1",
+    section_name: "Village Profile",
+    sub_section_no: "1.4",
+    sub_section_name: "WASH Situation in the Village",
+    sub_sub_section_no: "1.4.6",
+    sub_sub_section_name: "Streets and Access",
+  },
+
+  // ── Section 7: Social & Environmental Integration ───────────────────────────
+  // Social fields
+  social_context: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.1",
+    sub_sub_section_name: "Social Context Overview",
+  },
+  social_vulnerability: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.2",
+    sub_sub_section_name: "Demography and Settlement",
+  },
+  social_gender: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.3",
+    sub_sub_section_name: "Gender Dynamics and Women Empowerment",
+  },
+  social_livelihoods: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.4",
+    sub_sub_section_name: "Livelihoods and Economic Constraints",
+  },
+  social_education_health: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.5",
+    sub_sub_section_name: "Education and Health Linkages",
+  },
+  social_land: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.6",
+    sub_sub_section_name: "Land and Resettlement Considerations",
+  },
+  social_risk: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.7",
+    sub_sub_section_name: "Risk, Resilience and Community Institutions",
+  },
+  social_wash_integration: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.1",
+    sub_section_name: "Social Integration",
+    sub_sub_section_no: "7.1.8",
+    sub_sub_section_name: "Integration with WASH and Settlement Services",
+  },
+
+  // Environmental fields
+  env_overview: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.2",
+    sub_section_name: "Environmental Integration",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  env_risk_climate: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.2",
+    sub_section_name: "Environmental Integration",
+    sub_sub_section_no: "7.2.1",
+    sub_sub_section_name: "Environmental Risk and Climate Change",
+  },
+  env_wash_intervention: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.2",
+    sub_section_name: "Environmental Integration",
+    sub_sub_section_no: "7.2.2",
+    sub_sub_section_name: "WASH Intervention",
+  },
+  env_water_supply: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.2",
+    sub_section_name: "Environmental Integration",
+    sub_sub_section_no: "7.2.2.1",
+    sub_sub_section_name: "Water Supply System",
+  },
+  env_sanitation: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.2",
+    sub_section_name: "Environmental Integration",
+    sub_sub_section_no: "7.2.2.2",
+    sub_sub_section_name: "Sanitation System",
+  },
+  env_hygiene_promotion: {
+    section_no: "7",
+    section_name: "Social & Environmental Integration",
+    sub_section_no: "7.2",
+    sub_section_name: "Environmental Integration",
+    sub_sub_section_no: "7.2.2.3",
+    sub_sub_section_name: "Hygiene Promotion",
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SOCIAL & ENVIRONMENTAL FIELD DEFINITIONS  (Section 7)
+// These replace the hardcoded arrays in SocialEnvironmental.jsx
+// ─────────────────────────────────────────────────────────────────────────────
+export const SOCIAL_FIELD_DEFS = [
+  { id: "social_context",          label: "Social Context Overview",                    sectionNumber: "7.1.1" },
+  { id: "social_vulnerability",    label: "Demographics and Settlement",                sectionNumber: "7.1.2" },
+  { id: "social_gender",           label: "Gender Dynamics and Women Empowerment",      sectionNumber: "7.1.3" },
+  { id: "social_livelihoods",      label: "Livelihoods and Economic Constraints",       sectionNumber: "7.1.4" },
+  { id: "social_education_health", label: "Education and Health Linkages",              sectionNumber: "7.1.5" },
+  { id: "social_land",             label: "Land and Resettlement Considerations",       sectionNumber: "7.1.6" },
+  { id: "social_risk",             label: "Risk, Resilience and Community Institutions",sectionNumber: "7.1.7" },
+  { id: "social_wash_integration", label: "Integration with WASH and Settlement Services", sectionNumber: "7.1.8" },
+];
+
+export const ENV_FIELD_DEFS = [
+  { id: "env_overview",          label: "Environmental Integration — Overview",  sectionNumber: "7.2" },
+  { id: "env_risk_climate",      label: "Environmental Risk & Climate Change",   sectionNumber: "7.2.1" },
+  { id: "env_wash_intervention", label: "WASH Intervention",                     sectionNumber: "7.2.2" },
+  { id: "env_water_supply",      label: "Water Supply System",                   sectionNumber: "7.2.2.1" },
+  { id: "env_sanitation",        label: "Sanitation System",                     sectionNumber: "7.2.2.2" },
+  { id: "env_hygiene_promotion", label: "Hygiene Promotion",                     sectionNumber: "7.2.2.3" },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Legacy AI generation prompts (kept for PlaceholderTab — not used by LLM hook)
+// ─────────────────────────────────────────────────────────────────────────────
 export const FIELD_PROMPTS = {
   admin_location: (village) =>
     `Write a 2-paragraph Administrative Location & Access Map description for Village ${village} in rural Sindh, Pakistan. Include district, union council, taluka, GPS coordinates (approximate), and nearest town for market/healthcare access. Write in formal technical report style.`,
