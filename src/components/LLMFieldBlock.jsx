@@ -159,7 +159,7 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
         {editor.isActive("link") && (
           <Btn onClick={() => editor.chain().focus().unsetLink().run()} title="Unlink"><Unlink size={12} /></Btn>
         )}
-        <Btn onClick={() => imageInputRef.current?.click()} title="Image"><ImageIcon size={12} /></Btn>
+        {/* <Btn onClick={() => imageInputRef.current?.click()} title="Image"><ImageIcon size={12} /></Btn> */}
         <input ref={imageInputRef} type="file" accept="image/*" className="ife-file-input" onChange={handleImageUpload} />
         <Sep />
         <Btn onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()} title="Undo"><Undo size={12} /></Btn>
@@ -261,7 +261,7 @@ export default function LLMFieldBlock({
           color: "#1d4ed8",
           margin: 0,
           letterSpacing: "0.025em",
-          paddingLeft: 12,
+          // paddingLeft: 12,
           display: "flex",
           alignItems: "center",
           gap: 8,
@@ -269,13 +269,13 @@ export default function LLMFieldBlock({
           {sectionNumber && (
             <span style={{
               fontFamily: "monospace",
-              fontSize: 11,
-              fontWeight: 900,
-              background: "linear-gradient(135deg, #eff6ff, #eef2ff)",
+              fontSize: 14,
+              fontWeight: 700,
+              // background: "linear-gradient(135deg, #eff6ff, #eef2ff)",
               color: "#1d4ed8",
-              border: "1px solid rgba(147,197,253,0.6)",
-              borderRadius: 6,
-              padding: "2px 7px",
+              // border: "1px solid rgba(147,197,253,0.6)",
+              // borderRadius: 6,
+              // padding: "2px 7px",
               flexShrink: 0,
             }}>
               {sectionNumber}

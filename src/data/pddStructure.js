@@ -257,7 +257,7 @@ export const FIELD_API_PAYLOAD = {
     sub_section_no: "7.1",
     sub_section_name: "Social Integration",
     sub_sub_section_no: "7.1.1",
-    sub_sub_section_name: "Social Context Overview",
+    sub_sub_section_name: "Village Social Profile and Integration into WASH Services",
   },
   social_vulnerability: {
     section_no: "7",
@@ -273,7 +273,7 @@ export const FIELD_API_PAYLOAD = {
     sub_section_no: "7.1",
     sub_section_name: "Social Integration",
     sub_sub_section_no: "7.1.3",
-    sub_sub_section_name: "Gender Dynamics and Women Empowerment",
+    sub_sub_section_name: "Vulnerable Groups and Social Inclusion ",
   },
   social_livelihoods: {
     section_no: "7",
@@ -372,9 +372,9 @@ export const FIELD_API_PAYLOAD = {
 // These replace the hardcoded arrays in SocialEnvironmental.jsx
 // ─────────────────────────────────────────────────────────────────────────────
 export const SOCIAL_FIELD_DEFS = [
-  { id: "social_context",          label: "Social Context Overview",                    sectionNumber: "7.1.1" },
+  { id: "social_context",          label: "Village Social Profile and Integration into WASH Services ",                    sectionNumber: "7.1.1" },
   { id: "social_vulnerability",    label: "Demographics and Settlement",                sectionNumber: "7.1.2" },
-  { id: "social_gender",           label: "Gender Dynamics and Women Empowerment",      sectionNumber: "7.1.3" },
+  { id: "social_gender",           label: "Vulnerable Groups and Social Inclusion",      sectionNumber: "7.1.3" },
   { id: "social_livelihoods",      label: "Livelihoods and Economic Constraints",       sectionNumber: "7.1.4" },
   { id: "social_education_health", label: "Education and Health Linkages",              sectionNumber: "7.1.5" },
   { id: "social_land",             label: "Land and Resettlement Considerations",       sectionNumber: "7.1.6" },
