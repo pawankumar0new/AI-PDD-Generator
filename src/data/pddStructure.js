@@ -19,9 +19,9 @@ export const TABS = [
   { id: 5,  label: "Village Background and Location",              shortLabel: "Section 5" },
   { id: 6,  label: "Village Profile: Achar Khaskheli",            shortLabel: "Section 6" },
   { id: 7,  label: "Social & Environmental Integration",          shortLabel: "Section 7" },
-  { id: 8,  label: "Section 8",  shortLabel: "Section 8" },
-  { id: 9,  label: "Section 9",  shortLabel: "Section 9" },
-  { id: 10, label: "Section 10", shortLabel: "Section 10" },
+  { id: 8,  label: "Infrastructure Assessment and Gaps",    shortLabel: "Section 8" },
+  { id: 9,  label: "Design Criteria",                       shortLabel: "Section 9" },
+  { id: 10, label: "Proposed Infrastructure Solutions",     shortLabel: "Section 10" },
   { id: 11, label: "Section 11", shortLabel: "Section 11" },
   { id: 12, label: "Section 12", shortLabel: "Section 12" },
   { id: 13, label: "Section 13", shortLabel: "Section 13" },
@@ -365,7 +365,420 @@ export const FIELD_API_PAYLOAD = {
     sub_sub_section_no: "7.2.2.3",
     sub_sub_section_name: "Hygiene Promotion",
   },
+  infra_water_existing: {
+    section_no: "8",
+    section_name: "Infrastructure Assessment and Gaps",
+    sub_section_no: "8.1",
+    sub_section_name: "Existing Water Supply System",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  infra_water_quality: {
+    section_no: "8",
+    section_name: "Infrastructure Assessment and Gaps",
+    sub_section_no: "8.1",
+    sub_section_name: "Existing Water Supply System",
+    sub_sub_section_no: "8.1.1",
+    sub_sub_section_name: "Assessment of Water Sources and Quality",
+  },
+ 
+  // 8.2 Existing Sanitation System
+  infra_sanitation_existing: {
+    section_no: "8",
+    section_name: "Infrastructure Assessment and Gaps",
+    sub_section_no: "8.2",
+    sub_section_name: "Existing Sanitation System",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  infra_sanitation_options: {
+    section_no: "8",
+    section_name: "Infrastructure Assessment and Gaps",
+    sub_section_no: "8.2",
+    sub_section_name: "Existing Sanitation System",
+    sub_sub_section_no: "8.2.1",
+    sub_sub_section_name: "Assessment of Sewage Management Options",
+  },
+ 
+  // 8.3 Existing Stormwater Drainage
+  infra_drainage_existing: {
+    section_no: "8",
+    section_name: "Infrastructure Assessment and Gaps",
+    sub_section_no: "8.3",
+    sub_section_name: "Existing Stormwater Drainage",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+ 
+  // 8.4 Existing Track Conditions
+  infra_track_existing: {
+    section_no: "8",
+    section_name: "Infrastructure Assessment and Gaps",
+    sub_section_no: "8.4",
+    sub_section_name: "Existing Track Conditions",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+ 
+  // 8.5 Solid Waste Disposal System
+  infra_solidwaste_existing: {
+    section_no: "8",
+    section_name: "Infrastructure Assessment and Gaps",
+    sub_section_no: "8.5",
+    sub_section_name: "Solid Waste Disposal System in Villages",
+    sub_sub_section_no: "8.5.1",
+    sub_sub_section_name: "Existing Situation",
+  },
+ 
+  // ── Section 9: Design Criteria ──────────────────────────────────────────
+ 
+  // 9.1 Design Considerations for Water Supply
+  design_water_demand: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.1",
+    sub_sub_section_name: "Per Capita Water Demand",
+  },
+  design_water_discharge: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.2",
+    sub_sub_section_name: "Discharge Rate & Pumping Hours",
+  },
+  design_water_service_distance: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.3",
+    sub_sub_section_name: "Service Distance",
+  },
+  design_water_trips: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.4",
+    sub_sub_section_name: "Number of Trips & Carrying Capacity",
+  },
+  design_water_growth: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.5",
+    sub_sub_section_name: "Population Growth",
+  },
+  design_water_collection_time: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.6",
+    sub_sub_section_name: "Water Collection Time Threshold",
+  },
+  design_water_quality_standards: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.7",
+    sub_sub_section_name: "Water Quality Standards",
+  },
+  design_water_handpumps: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.1",
+    sub_section_name: "Design Considerations for Water Supply",
+    sub_sub_section_no: "9.1.8",
+    sub_sub_section_name: "Provision of Hand Pumps",
+  },
+ 
+  // 9.2 Design Considerations for Sanitation
+  design_san_toilet_allocation: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.2",
+    sub_section_name: "Design Considerations for Sanitation",
+    sub_sub_section_no: "9.2.1",
+    sub_sub_section_name: "Toilet Allocation",
+  },
+  design_san_location_privacy: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.2",
+    sub_section_name: "Design Considerations for Sanitation",
+    sub_sub_section_no: "9.2.2",
+    sub_sub_section_name: "Location & Privacy",
+  },
+  design_san_distance: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.2",
+    sub_section_name: "Design Considerations for Sanitation",
+    sub_sub_section_no: "9.2.3",
+    sub_sub_section_name: "Distance & Accessibility",
+  },
+  design_san_structural: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.2",
+    sub_section_name: "Design Considerations for Sanitation",
+    sub_sub_section_no: "9.2.4",
+    sub_sub_section_name: "Structural & Technical Standards",
+  },
+  design_san_drainage: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.2",
+    sub_section_name: "Design Considerations for Sanitation",
+    sub_sub_section_no: "9.2.5",
+    sub_sub_section_name: "Drainage & Waste Management",
+  },
+  design_san_school: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.2",
+    sub_section_name: "Design Considerations for Sanitation",
+    sub_sub_section_no: "9.2.6",
+    sub_sub_section_name: "School Sanitation Facilities",
+  },
+ 
+  // 9.3 Design Considerations for Stormwater Drainage
+  design_drain_rational: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.3",
+    sub_section_name: "Design Considerations for Stormwater Drainage",
+    sub_sub_section_no: "9.3.1",
+    sub_sub_section_name: "Rational Method",
+  },
+  design_drain_tc: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.3",
+    sub_section_name: "Design Considerations for Stormwater Drainage",
+    sub_sub_section_no: "9.3.2",
+    sub_sub_section_name: "Time of Concentration (Tc)",
+  },
+  design_drain_storm_freq: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.3",
+    sub_section_name: "Design Considerations for Stormwater Drainage",
+    sub_sub_section_no: "9.3.3",
+    sub_sub_section_name: "Design Storm Frequency",
+  },
+  design_drain_filling: {
+    section_no: "9",
+    section_name: "Design Criteria",
+    sub_section_no: "9.3",
+    sub_section_name: "Design Considerations for Stormwater Drainage",
+    sub_sub_section_no: "9.3.4",
+    sub_sub_section_name: "Filling Criteria",
+  },
+ 
+  // ── Section 10: Proposed Infrastructure Solutions ───────────────────────
+ 
+  // 10.1 Proposed Solution for Water Supply System
+  prop_water_demand: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.1",
+    sub_section_name: "Proposed Solution for Water Supply System",
+    sub_sub_section_no: "10.1.1",
+    sub_sub_section_name: "Water Demand Assessment",
+  },
+  prop_water_handpump: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.1",
+    sub_section_name: "Proposed Solution for Water Supply System",
+    sub_sub_section_no: "10.1.2",
+    sub_sub_section_name: "Proposed Hand Pump",
+  },
+  prop_water_rehab: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.1",
+    sub_section_name: "Proposed Solution for Water Supply System",
+    sub_sub_section_no: "10.1.3",
+    sub_sub_section_name: "Hand Pump Rehabilitation",
+  },
+  prop_water_drainage: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.1",
+    sub_section_name: "Proposed Solution for Water Supply System",
+    sub_sub_section_no: "10.1.4",
+    sub_sub_section_name: "Drainage from Existing Hand Pumps",
+  },
+ 
+  // 10.2 Proposed Solution for Sanitation
+  prop_san_toilet: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.2",
+    sub_section_name: "Proposed Solution for Sanitation",
+    sub_sub_section_no: "10.2.1",
+    sub_sub_section_name: "Toilet Decommissioning and Construction",
+  },
+  prop_san_thodi: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.2",
+    sub_section_name: "Proposed Solution for Sanitation",
+    sub_sub_section_no: "10.2.2",
+    sub_sub_section_name: "T-Hodi Pit Installation",
+  },
+  prop_san_sewer: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.2",
+    sub_section_name: "Proposed Solution for Sanitation",
+    sub_sub_section_no: "10.2.3",
+    sub_sub_section_name: "Sewer Network Layout",
+  },
+  prop_san_manhole: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.2",
+    sub_section_name: "Proposed Solution for Sanitation",
+    sub_sub_section_no: "10.2.4",
+    sub_sub_section_name: "Manhole Design and Placement",
+  },
+  prop_san_lift_station: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.2",
+    sub_section_name: "Proposed Solution for Sanitation",
+    sub_sub_section_no: "10.2.5",
+    sub_sub_section_name: "Lift Station",
+  },
+  prop_san_solar: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.2",
+    sub_section_name: "Proposed Solution for Sanitation",
+    sub_sub_section_no: "10.2.6",
+    sub_sub_section_name: "Solar System",
+  },
+  prop_san_treatment: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.2",
+    sub_section_name: "Proposed Solution for Sanitation",
+    sub_sub_section_no: "10.2.7",
+    sub_sub_section_name: "Wastewater Treatment System",
+  },
+ 
+  // 10.3 Proposed Stormwater Drainage
+  prop_drainage_backfill: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.3",
+    sub_section_name: "Proposed Stormwater Drainage",
+    sub_sub_section_no: "10.3.1",
+    sub_sub_section_name: "Backfilling of Existing Pond",
+  },
+ 
+  // 10.4 Proposed Street Pavement Infrastructure
+  prop_pave_network: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.4",
+    sub_section_name: "Proposed Street Pavement Infrastructure",
+    sub_sub_section_no: "10.4.1",
+    sub_sub_section_name: "Standardized Paved Track Network",
+  },
+  prop_pave_elevation: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.4",
+    sub_section_name: "Proposed Street Pavement Infrastructure",
+    sub_sub_section_no: "10.4.2",
+    sub_sub_section_name: "Elevation and Earthwork",
+  },
+  prop_pave_material: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.4",
+    sub_section_name: "Proposed Street Pavement Infrastructure",
+    sub_sub_section_no: "10.4.3",
+    sub_sub_section_name: "Material and Construction",
+  },
+ 
+  // 10.5 Proposed Solid Waste Management Solution
+  prop_swm_generation: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.1",
+    sub_sub_section_name: "Waste Generation and Composition",
+  },
+  prop_swm_disposal: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.2",
+    sub_sub_section_name: "Disposal at Undesignated Locations and Burning",
+  },
+  prop_swm_site: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.3",
+    sub_sub_section_name: "Disposal Site",
+  },
+  prop_swm_plan: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.4",
+    sub_sub_section_name: "Solid Waste Management Plan",
+  },
+  prop_swm_capacity: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.5",
+    sub_sub_section_name: "Capacity Building",
+  },
+  prop_swm_segregation: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.6",
+    sub_sub_section_name: "Promoting Waste Segregation and Recycling",
+  },
+  prop_swm_technologies: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.7",
+    sub_sub_section_name: "Awareness of Waste Processing Technologies",
+  },
+  prop_swm_financial: {
+    section_no: "10",
+    section_name: "Proposed Infrastructure Solutions",
+    sub_section_no: "10.5",
+    sub_section_name: "Proposed Solid Waste Management Solution",
+    sub_sub_section_no: "10.5.8",
+    sub_sub_section_name: "Financial Sustainability",
+  },
 };
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SOCIAL & ENVIRONMENTAL FIELD DEFINITIONS  (Section 7)
@@ -390,6 +803,98 @@ export const ENV_FIELD_DEFS = [
   { id: "env_sanitation",        label: "Sanitation System",                     sectionNumber: "7.2.2.2" },
   { id: "env_hygiene_promotion", label: "Hygiene Promotion",                     sectionNumber: "7.2.2.3" },
 ];
+
+
+// ── Section 8 field defs ────────────────────────────────────────────────────
+export const INFRA_WATER_FIELD_DEFS = [
+  { id: "infra_water_existing", label: "Existing Water Supply System",          sectionNumber: "8.1" },
+  { id: "infra_water_quality",  label: "Assessment of Water Sources and Quality", sectionNumber: "8.1.1" },
+];
+ 
+export const INFRA_SANITATION_FIELD_DEFS = [
+  { id: "infra_sanitation_existing", label: "Existing Sanitation System",           sectionNumber: "8.2" },
+  { id: "infra_sanitation_options",  label: "Assessment of Sewage Management Options", sectionNumber: "8.2.1" },
+];
+ 
+export const INFRA_DRAINAGE_FIELD_DEFS = [
+  { id: "infra_drainage_existing", label: "Existing Stormwater Drainage", sectionNumber: "8.3" },
+];
+ 
+export const INFRA_TRACK_FIELD_DEFS = [
+  { id: "infra_track_existing", label: "Existing Track Conditions", sectionNumber: "8.4" },
+];
+ 
+export const INFRA_SOLIDWASTE_FIELD_DEFS = [
+  { id: "infra_solidwaste_existing", label: "Existing Situation", sectionNumber: "8.5.1" },
+];
+ 
+// ── Section 9 field defs ────────────────────────────────────────────────────
+export const DESIGN_WATER_FIELD_DEFS = [
+  { id: "design_water_demand",           label: "Per Capita Water Demand",            sectionNumber: "9.1.1" },
+  { id: "design_water_discharge",        label: "Discharge Rate & Pumping Hours",     sectionNumber: "9.1.2" },
+  { id: "design_water_service_distance", label: "Service Distance",                   sectionNumber: "9.1.3" },
+  { id: "design_water_trips",            label: "Number of Trips & Carrying Capacity",sectionNumber: "9.1.4" },
+  { id: "design_water_growth",           label: "Population Growth",                  sectionNumber: "9.1.5" },
+  { id: "design_water_collection_time",  label: "Water Collection Time Threshold",    sectionNumber: "9.1.6" },
+  { id: "design_water_quality_standards",label: "Water Quality Standards",            sectionNumber: "9.1.7" },
+  { id: "design_water_handpumps",        label: "Provision of Hand Pumps",            sectionNumber: "9.1.8" },
+];
+ 
+export const DESIGN_SANITATION_FIELD_DEFS = [
+  { id: "design_san_toilet_allocation", label: "Toilet Allocation",           sectionNumber: "9.2.1" },
+  { id: "design_san_location_privacy",  label: "Location & Privacy",          sectionNumber: "9.2.2" },
+  { id: "design_san_distance",          label: "Distance & Accessibility",    sectionNumber: "9.2.3" },
+  { id: "design_san_structural",        label: "Structural & Technical Standards", sectionNumber: "9.2.4" },
+  { id: "design_san_drainage",          label: "Drainage & Waste Management", sectionNumber: "9.2.5" },
+  { id: "design_san_school",            label: "School Sanitation Facilities",sectionNumber: "9.2.6" },
+];
+ 
+export const DESIGN_DRAINAGE_FIELD_DEFS = [
+  { id: "design_drain_rational",    label: "Rational Method",           sectionNumber: "9.3.1" },
+  { id: "design_drain_tc",          label: "Time of Concentration (Tc)",sectionNumber: "9.3.2" },
+  { id: "design_drain_storm_freq",  label: "Design Storm Frequency",    sectionNumber: "9.3.3" },
+  { id: "design_drain_filling",     label: "Filling Criteria",          sectionNumber: "9.3.4" },
+];
+ 
+// ── Section 10 field defs ───────────────────────────────────────────────────
+export const PROP_WATER_FIELD_DEFS = [
+  { id: "prop_water_demand",   label: "Water Demand Assessment",          sectionNumber: "10.1.1" },
+  { id: "prop_water_handpump", label: "Proposed Hand Pump",               sectionNumber: "10.1.2" },
+  { id: "prop_water_rehab",    label: "Hand Pump Rehabilitation",         sectionNumber: "10.1.3" },
+  { id: "prop_water_drainage", label: "Drainage from Existing Hand Pumps",sectionNumber: "10.1.4" },
+];
+ 
+export const PROP_SANITATION_FIELD_DEFS = [
+  { id: "prop_san_toilet",       label: "Toilet Decommissioning and Construction", sectionNumber: "10.2.1" },
+  { id: "prop_san_thodi",        label: "T-Hodi Pit Installation",                 sectionNumber: "10.2.2" },
+  { id: "prop_san_sewer",        label: "Sewer Network Layout",                    sectionNumber: "10.2.3" },
+  { id: "prop_san_manhole",      label: "Manhole Design and Placement",            sectionNumber: "10.2.4" },
+  { id: "prop_san_lift_station", label: "Lift Station",                            sectionNumber: "10.2.5" },
+  { id: "prop_san_solar",        label: "Solar System",                            sectionNumber: "10.2.6" },
+  { id: "prop_san_treatment",    label: "Wastewater Treatment System",             sectionNumber: "10.2.7" },
+];
+ 
+export const PROP_DRAINAGE_FIELD_DEFS = [
+  { id: "prop_drainage_backfill", label: "Backfilling of Existing Pond", sectionNumber: "10.3.1" },
+];
+ 
+export const PROP_PAVEMENT_FIELD_DEFS = [
+  { id: "prop_pave_network",   label: "Standardized Paved Track Network", sectionNumber: "10.4.1" },
+  { id: "prop_pave_elevation", label: "Elevation and Earthwork",          sectionNumber: "10.4.2" },
+  { id: "prop_pave_material",  label: "Material and Construction",        sectionNumber: "10.4.3" },
+];
+ 
+export const PROP_SOLIDWASTE_FIELD_DEFS = [
+  { id: "prop_swm_generation",   label: "Waste Generation and Composition",              sectionNumber: "10.5.1" },
+  { id: "prop_swm_disposal",     label: "Disposal at Undesignated Locations and Burning",sectionNumber: "10.5.2" },
+  { id: "prop_swm_site",         label: "Disposal Site",                                 sectionNumber: "10.5.3" },
+  { id: "prop_swm_plan",         label: "Solid Waste Management Plan",                   sectionNumber: "10.5.4" },
+  { id: "prop_swm_capacity",     label: "Capacity Building",                             sectionNumber: "10.5.5" },
+  { id: "prop_swm_segregation",  label: "Promoting Waste Segregation and Recycling",     sectionNumber: "10.5.6" },
+  { id: "prop_swm_technologies", label: "Awareness of Waste Processing Technologies",    sectionNumber: "10.5.7" },
+  { id: "prop_swm_financial",    label: "Financial Sustainability",                      sectionNumber: "10.5.8" },
+];
+ 
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Legacy AI generation prompts (kept for PlaceholderTab — not used by LLM hook)

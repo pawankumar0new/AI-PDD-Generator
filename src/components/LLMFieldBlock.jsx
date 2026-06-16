@@ -270,7 +270,8 @@ export default function LLMFieldBlock({
   loading,         // boolean — API in flight
   error,           // string | null
   onGenerate,      // () => void — triggers API call
-  onChange,        // (html: string) => void — syncs edits back to App state
+  onChange,
+  hideGenerateBtn,       // (html: string) => void — syncs edits back to App state
 }) {
   const [editing, setEditing] = useState(false);
   // draft tracks in-progress edits; initialised from prop on each edit open
@@ -338,8 +339,8 @@ export default function LLMFieldBlock({
  
         {/* Action buttons — right side */}
         <div className="field-heading-actions">
-          {loading ? (
-            /* Generating spinner */
+          {loading && !hideGenerateBtn ? (
+            /* Generating spinner — only shown when hideGenerateBtn is false */
             <button disabled type="button" className="btn-edit" style={{ opacity: 0.75, cursor: "not-allowed" }}>
               <span style={{
                 display: "inline-block", width: 11, height: 11,
@@ -354,34 +355,33 @@ export default function LLMFieldBlock({
             null
           ) : (
             <div style={{ display: "flex", gap: 6 }}>
-              {/* Generate / Regenerate */}
-              <button
-                onClick={onGenerate}
-                type="button"
-                title={isEmpty ? "Generate with AI" : "Regenerate with AI"}
-                style={{
-                  display: "flex", alignItems: "center", gap: 6,
-                  padding: "5px 12px", fontSize: 12, fontWeight: 600,
-                  borderRadius: 4, border: "none", cursor: "pointer",
-                  color: "#ffffff",
-                  background: isEmpty
-                    ? "linear-gradient(to right, #3b82f6, #1e40af)"
-                    : "linear-gradient(to right, #7c3aed, #4c1d95)",
-                  fontFamily: "inherit",
-                  transition: "opacity 0.15s",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.88"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-              >
-                {isEmpty ? (
-                  <><Sparkles size={11} strokeWidth={1.75} /> Generate</>
-                ) : (
-                  <><RefreshCw size={11} strokeWidth={1.75} /> Regenerate</>
-                )}
-              </button>
- 
-              {/* Edit — only shown when there's content */}
-              {!isEmpty && (
+              {!hideGenerateBtn && (
+                <button
+                  onClick={onGenerate}
+                  type="button"
+                  title={isEmpty ? "Generate with AI" : "Regenerate with AI"}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    padding: "5px 12px", fontSize: 12, fontWeight: 600,
+                    borderRadius: 4, border: "none", cursor: "pointer",
+                    color: "#ffffff",
+                    background: isEmpty
+                      ? "linear-gradient(to right, #3b82f6, #1e40af)"
+                      : "linear-gradient(to right, #7c3aed, #4c1d95)",
+                    fontFamily: "inherit",
+                    transition: "opacity 0.15s",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.88"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+                >
+                  {isEmpty ? (
+                    <><Sparkles size={11} strokeWidth={1.75} /> Generate</>
+                  ) : (
+                    <><RefreshCw size={11} strokeWidth={1.75} /> Regenerate</>
+                  )}
+                </button>
+              )}
+              {!isEmpty && !loading && (   // ← hide Edit button while loading
                 <button onClick={handleEditOpen} type="button" className="btn-edit">
                   <Pencil size={10} /> Edit
                 </button>
@@ -425,8 +425,10 @@ export default function LLMFieldBlock({
         }}>
           <Sparkles size={20} style={{ color: "#a8a29e", marginBottom: 8 }} />
           <p style={{ fontSize: 13, color: "#a8a29e", fontStyle: "italic", margin: 0 }}>
-            No content yet. Click <strong style={{ color: "#3b82f6" }}>Generate</strong> to create with AI,
-            or <strong style={{ color: "#00529d" }}>Edit</strong> to write manually.
+          {hideGenerateBtn
+              ? <>No content yet. Click <strong style={{ color: "#00529d" }}>Write manually</strong> to add content.</>
+              : <>No content yet. Click <strong style={{ color: "#3b82f6" }}>Generate</strong> to create with AI, or <strong style={{ color: "#00529d" }}>Edit</strong> to write manually.</>
+            }
           </p>
           {/* Manual edit option even when empty */}
           <button

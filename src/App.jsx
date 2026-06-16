@@ -4,6 +4,9 @@ import PlaceholderTab from "./pages/PlaceholderTab";
 import VillageBackground from "./pages/VillageBackground";
 import VillageProfileSection from "./pages/VillageProfileSection";
 import SocialEnvironmental from "./pages/SocialEnvironmental";
+import InfrastructureAssessment from "./pages/InfrastructureAssessment";
+import DesignCriteria from "./pages/DesignCriteria";
+import ProposedInfrastructure from "./pages/ProposedInfrastructure";
 // import { VILLAGES, TABS } from "./data/pddStructure";
 import { useLLMGenerate } from "./hooks/useLLMGenerate";
 import { MapPin, ChevronDown } from "lucide-react";
@@ -73,6 +76,46 @@ export default function App() {
     if (activeTab === 7) {
       return (
         <SocialEnvironmental
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+      if (activeTab === 8) {
+      return (
+        <InfrastructureAssessment
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+ 
+    // ── Section 9: Design Criteria ────────────────────────────────────────────
+    if (activeTab === 9) {
+      return (
+        <DesignCriteria
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+ 
+    // ── Section 10: Proposed Infrastructure Solutions ─────────────────────────
+    if (activeTab === 10) {
+      return (
+        <ProposedInfrastructure
           village={selectedVillage}
           fieldContent={villageContent}
           fieldLoading={loading}
