@@ -386,7 +386,10 @@ body {
   height: 0;
 }
 .inline-field-editor .ProseMirror strong { font-weight: 700; }
-.inline-field-editor .ProseMirror em     { font-style: italic; }
+.inline-field-editor .ProseMirror em {
+  font-style: italic !important;
+  color: inherit;
+}
 
 /* ── PDD Content Container — unified scope for read view + TipTap editor ─── */
 /* ── PDD unified typography — read view + TipTap editor ─── */
@@ -454,4 +457,12 @@ body {
   padding-left: 12px;
   text-transform: none;
   letter-spacing: 0;
+}
+.field-read-content img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 12px auto;
+  display: block;
 }

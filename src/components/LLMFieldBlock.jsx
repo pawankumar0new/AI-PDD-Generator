@@ -9,8 +9,13 @@ import {
   Highlighter, Link as LinkIcon, Unlink, Image as ImageIcon,
   Subscript as SubIcon, Superscript as SupIcon,
   Code, Code2, Minus, Quote,
-  Undo, Redo,
+  Undo, Redo, Table as TableIcon,
 } from "lucide-react";
+import BaseItalic from "@tiptap/extension-italic";
+import { Table } from "@tiptap/extension-table";
+import { TableRow } from "@tiptap/extension-table-row";
+import { TableHeader } from "@tiptap/extension-table-header";
+import { TableCell } from "@tiptap/extension-table-cell";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -47,11 +52,16 @@ function Label({ children }) { return <span className="ife-label">{children}</sp
 function InlineEditor({ value, onChange, onSave, onCancel }) {
   const imageInputRef = useRef(null);
   const isLocalEdit = useRef(false);
- 
+ const ItalicExtension = BaseItalic.extend({
+  renderHTML({ HTMLAttributes }) {
+    return ["em", { ...HTMLAttributes, style: "font-style: italic" }, 0];
+  },
+});
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3, 4] }, gapcursor: false }),
       Underline,
+      ItalicExtension,  
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       TextStyle,
       Color,
@@ -62,6 +72,10 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
       Superscript,
       TaskList,
       TaskItem.configure({ nested: true }),
+      Table.configure({ resizable: false }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ],
     content: value || "",
     onUpdate({ editor }) {
@@ -159,9 +173,47 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
         {editor.isActive("link") && (
           <Btn onClick={() => editor.chain().focus().unsetLink().run()} title="Unlink"><Unlink size={12} /></Btn>
         )}
-        {/* <Btn onClick={() => imageInputRef.current?.click()} title="Image"><ImageIcon size={12} /></Btn> */}
+        <ImageIcon size={12} />
         <input ref={imageInputRef} type="file" accept="image/*" className="ife-file-input" onChange={handleImageUpload} />
+
         <Sep />
+       
+        <Label>Table</Label>
+        <Btn
+          onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}
+          title="Insert table">
+          <TableIcon size={12} />
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().addColumnAfter().run()}
+          disabled={!editor.can().addColumnAfter()}
+          title="Add column">
+          <span style={{ fontSize: 10, fontWeight: 700 }}>C+</span>
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().deleteColumn().run()}
+          disabled={!editor.can().deleteColumn()}
+          title="Delete column">
+          <span style={{ fontSize: 10, fontWeight: 700 }}>C−</span>
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().addRowAfter().run()}
+          disabled={!editor.can().addRowAfter()}
+          title="Add row">
+          <span style={{ fontSize: 10, fontWeight: 700 }}>R+</span>
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().deleteRow().run()}
+          disabled={!editor.can().deleteRow()}
+          title="Delete row">
+          <span style={{ fontSize: 10, fontWeight: 700 }}>R−</span>
+        </Btn>
+        <Btn
+          onClick={() => editor.chain().focus().deleteTable().run()}
+          disabled={!editor.can().deleteTable()}
+          title="Delete table">
+          <span style={{ fontSize: 10, fontWeight: 700 }}>Del</span>
+        </Btn>
         <Btn onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()} title="Undo"><Undo size={12} /></Btn>
         <Btn onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()} title="Redo"><Redo size={12} /></Btn>
  

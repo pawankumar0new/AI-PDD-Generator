@@ -435,7 +435,14 @@
 }
 
 .inline-field-editor .ProseMirror strong { font-weight: 700; color: #1c1917; }
-.inline-field-editor .ProseMirror em     { font-style: italic; }
+.inline-field-editor .ProseMirror em {
+  font-style: oblique 14deg !important;
+  color: inherit;
+}
+.field-read-content em,
+.pdd-content-container em {
+  font-style: oblique 14deg !important;
+}
 
 /* ── TipTap table inside inline editor ── */
 .inline-field-editor .ProseMirror table {
@@ -623,4 +630,14 @@
   display: block;
   margin: 16px auto;
   border-radius: 4px;
+}
+.field-read-content strong,
+.pdd-content-container strong {
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.field-read-content em,
+.pdd-content-container em {
+  font-style: italic;
 }
