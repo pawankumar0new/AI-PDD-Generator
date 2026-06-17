@@ -12,23 +12,23 @@ export const VILLAGES = [
 ];
 
 export const TABS = [
-  { id: 1,  label: "Section 1",  shortLabel: "Section 1" },
-  { id: 2,  label: "Section 2",  shortLabel: "Section 2" },
-  { id: 3,  label: "Section 3",  shortLabel: "Section 3" },
-  { id: 4,  label: "Section 4",  shortLabel: "Section 4" },
+  { id: 1,  label: "Project Summary",                 shortLabel: "Section 1" },
+  { id: 2,  label: "Cost Detail",                     shortLabel: "Section 2" },
+  { id: 3,  label: "Sub-Components",                  shortLabel: "Section 3" },
+  { id: 4,  label: "O&M Cost (LCCA)",                 shortLabel: "Section 4" },
   { id: 5,  label: "Village Background and Location",              shortLabel: "Section 5" },
   { id: 6,  label: "Village Profile: Achar Khaskheli",            shortLabel: "Section 6" },
   { id: 7,  label: "Social & Environmental Integration",          shortLabel: "Section 7" },
   { id: 8,  label: "Infrastructure Assessment and Gaps",    shortLabel: "Section 8" },
   { id: 9,  label: "Design Criteria",                       shortLabel: "Section 9" },
   { id: 10, label: "Proposed Infrastructure Solutions",     shortLabel: "Section 10" },
-  { id: 11, label: "Section 11", shortLabel: "Section 11" },
-  { id: 12, label: "Section 12", shortLabel: "Section 12" },
-  { id: 13, label: "Section 13", shortLabel: "Section 13" },
-  { id: 14, label: "Section 14", shortLabel: "Section 14" },
-  { id: 15, label: "Section 15", shortLabel: "Section 15" },
-  { id: 16, label: "Section 16", shortLabel: "Section 16" },
-  { id: 17, label: "Section 17", shortLabel: "Section 17" },
+   { id: 11, label: "Risk Matrix", shortLabel: "Section 11" },
+  { id: 12, label: "Quantities and Cost Estimates", shortLabel: "Section 12" },
+  { id: 13, label: "Operation and Maintenance Cost", shortLabel: "Section 13" },
+    { id: 14, label: "Economic Analysis", shortLabel: "Section 14" },
+  { id: 15, label: "Project Implementation", shortLabel: "Section 15" },
+  { id: 16, label: "Project Management", shortLabel: "Section 16" },
+    { id: 17, label: "Section 17", shortLabel: "Section 17" },
   { id: 18, label: "Section 18", shortLabel: "Section 18" },
   { id: 19, label: "Section 19", shortLabel: "Section 19" },
   { id: 20, label: "Section 20", shortLabel: "Section 20" },
@@ -102,6 +102,43 @@ export const VILLAGE_ID_MAP = {
   "Ghulam Nabi Shar": "replace-with-real-uuid",
 };
 export const FIELD_API_PAYLOAD = {
+
+    // Section 1
+  project_summary: {
+    section_no: "1",
+    section_name: "Project Summary",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  // Section 2
+  cost_detail: {
+    section_no: "2",
+    section_name: "Cost Detail",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  // Section 3
+  sub_components: {
+    section_no: "3",
+    section_name: "Details of Project Sub-components",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  // Section 4
+  om_cost: {
+    section_no: "4",
+    section_name: "O&M Cost (Life Cycle Cost Analysis)",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
 
   // ── Section 5: Village Background and Location ──────────────────────────────
   village_background: {
@@ -777,6 +814,175 @@ export const FIELD_API_PAYLOAD = {
     sub_sub_section_no: "10.5.8",
     sub_sub_section_name: "Financial Sustainability",
   },
+   risk_matrix: {
+    section_no: "11",
+    section_name: "Risk Matrix",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // ── Section 12: Quantities and Cost Estimates ──
+  quantities_cost_estimates: {
+    section_no: "12",
+    section_name: "Quantities and Cost Estimates",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // ── Section 13: Operation and Maintenance Cost ──
+  operation_maintenance_cost: {
+    section_no: "13",
+    section_name: "Operation and Maintenance Cost",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+    // ── Section 14: Economic Analysis ──
+  economic_analysis: {
+    section_no: "14",
+    section_name: "Economic Analysis",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // ── Section 15: Project Implementation ──
+  impl_sanitation: {
+    section_no: "15",
+    section_name: "Project Implementation",
+    sub_section_no: "15.1",
+    sub_section_name: "Construction of Sanitation Infrastructure",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  impl_water: {
+    section_no: "15",
+    section_name: "Project Implementation",
+    sub_section_no: "15.2",
+    sub_section_name: "Water Supply Infrastructure",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  impl_street: {
+    section_no: "15",
+    section_name: "Project Implementation",
+    sub_section_no: "15.3",
+    sub_section_name: "Street Pavements and Embankment Works",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  impl_drainage: {
+    section_no: "15",
+    section_name: "Project Implementation",
+    sub_section_no: "15.4",
+    sub_section_name: "Integration of Hand Pump Drainage",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  impl_engagement: {
+    section_no: "15",
+    section_name: "Project Implementation",
+    sub_section_no: "15.5",
+    sub_section_name: "Community Engagement and Finalization",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // ── Section 16: Project Management ──
+  mgmt_project_committee: {
+    section_no: "16",
+    section_name: "Project Management",
+    sub_section_no: "16.1",
+    sub_section_name: "Project Committee/Procurement Committee",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  mgmt_maintenance: {
+    section_no: "16",
+    section_name: "Project Management",
+    sub_section_no: "16.2",
+    sub_section_name: "Maintenance Committee",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  mgmt_funds: {
+    section_no: "16",
+    section_name: "Project Management",
+    sub_section_no: "16.3",
+    sub_section_name: "Funds Transfer",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  mgmt_monitoring: {
+    section_no: "16",
+    section_name: "Project Management",
+    sub_section_no: "16.4",
+    sub_section_name: "Monitoring Evaluation",
+    sub_sub_section_no: "16.4.1",
+    sub_sub_section_name: "Monitoring",
+  },
+  mgmt_evaluation: {
+    section_no: "16",
+    section_name: "Project Management",
+    sub_section_no: "16.4",
+    sub_section_name: "Monitoring Evaluation",
+    sub_sub_section_no: "16.4.2",
+    sub_sub_section_name: "Evaluation",
+  },
+   stakeholders_social_org: {
+    section_no: "17",
+    section_name: "Stakeholders",
+    sub_section_no: "17.1",
+    sub_section_name: "Social Organization",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+  stakeholders_gov_bodies: {
+    section_no: "17",
+    section_name: "Stakeholders",
+    sub_section_no: "17.2",
+    sub_section_name: "Government Bodies",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // Section 18
+  other_project_benefits: {
+    section_no: "18",
+    section_name: "Other Project Benefits",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // Section 19
+  env_social_checklist: {
+    section_no: "19",
+    section_name: "Environmental and Social Review Checklist with Mitigation Guidelines",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
+  // Section 20
+  es_screening_signoff: {
+    section_no: "20",
+    section_name: "E&S Screening Sign-off",
+    sub_section_no: "",
+    sub_section_name: "",
+    sub_sub_section_no: "",
+    sub_sub_section_name: "",
+  },
+
 };
 
 
@@ -784,6 +990,19 @@ export const FIELD_API_PAYLOAD = {
 // SOCIAL & ENVIRONMENTAL FIELD DEFINITIONS  (Section 7)
 // These replace the hardcoded arrays in SocialEnvironmental.jsx
 // ─────────────────────────────────────────────────────────────────────────────
+export const PROJECT_SUMMARY_FIELD_DEFS = [
+  { id: "project_summary", label: "", sectionNumber: "" },
+];
+export const COST_DETAIL_FIELD_DEFS = [
+  { id: "cost_detail", label: "", sectionNumber: "" },
+];
+export const SUB_COMPONENTS_FIELD_DEFS = [
+  { id: "sub_components", label: "", sectionNumber: "" },
+];
+export const OM_COST_FIELD_DEFS = [
+  { id: "om_cost", label: "", sectionNumber: "" },
+];
+
 export const SOCIAL_FIELD_DEFS = [
   { id: "social_context",          label: "Village Social Profile and Integration into WASH Services ",                    sectionNumber: "7.1.1" },
   { id: "social_vulnerability",    label: "Demographics and Settlement",                sectionNumber: "7.1.2" },
@@ -796,7 +1015,7 @@ export const SOCIAL_FIELD_DEFS = [
 ];
 
 export const ENV_FIELD_DEFS = [
-  { id: "env_overview",          label: "Environmental Integration — Overview",  sectionNumber: "7.2" },
+  { id: "env_overview",          label: "",  sectionNumber: "" },
   { id: "env_risk_climate",      label: "Environmental Risk & Climate Change",   sectionNumber: "7.2.1" },
   { id: "env_wash_intervention", label: "WASH Intervention",                     sectionNumber: "7.2.2" },
   { id: "env_water_supply",      label: "Water Supply System",                   sectionNumber: "7.2.2.1" },
@@ -807,21 +1026,21 @@ export const ENV_FIELD_DEFS = [
 
 // ── Section 8 field defs ────────────────────────────────────────────────────
 export const INFRA_WATER_FIELD_DEFS = [
-  { id: "infra_water_existing", label: "Existing Water Supply System",          sectionNumber: "8.1" },
+  { id: "infra_water_existing", label: "",          sectionNumber: "" },
   { id: "infra_water_quality",  label: "Assessment of Water Sources and Quality", sectionNumber: "8.1.1" },
 ];
  
 export const INFRA_SANITATION_FIELD_DEFS = [
-  { id: "infra_sanitation_existing", label: "Existing Sanitation System",           sectionNumber: "8.2" },
+  { id: "infra_sanitation_existing", label: "",           sectionNumber: "" },
   { id: "infra_sanitation_options",  label: "Assessment of Sewage Management Options", sectionNumber: "8.2.1" },
 ];
  
 export const INFRA_DRAINAGE_FIELD_DEFS = [
-  { id: "infra_drainage_existing", label: "Existing Stormwater Drainage", sectionNumber: "8.3" },
+  { id: "infra_drainage_existing", label: "", sectionNumber: "" },
 ];
  
 export const INFRA_TRACK_FIELD_DEFS = [
-  { id: "infra_track_existing", label: "Existing Track Conditions", sectionNumber: "8.4" },
+  { id: "infra_track_existing", label: "", sectionNumber: "" },
 ];
  
 export const INFRA_SOLIDWASTE_FIELD_DEFS = [
@@ -894,7 +1113,53 @@ export const PROP_SOLIDWASTE_FIELD_DEFS = [
   { id: "prop_swm_technologies", label: "Awareness of Waste Processing Technologies",    sectionNumber: "10.5.7" },
   { id: "prop_swm_financial",    label: "Financial Sustainability",                      sectionNumber: "10.5.8" },
 ];
- 
+ export const RISK_MATRIX_FIELD_DEFS = [
+  { id: "risk_matrix", label: "", sectionNumber: "" },
+];
+
+export const COST_ESTIMATES_FIELD_DEFS = [
+  { id: "quantities_cost_estimates", label: "", sectionNumber: "" },
+];
+
+export const OPM_FIELD_DEFS = [
+  { id: "operation_maintenance_cost", label: "", sectionNumber: "" },
+];
+export const ECONOMIC_FIELD_DEFS = [
+  { id: "economic_analysis", label: "", sectionNumber: "" },
+];
+
+export const IMPLEMENTATION_FIELD_DEFS = [
+  { id: "impl_sanitation",  label: "Construction of Sanitation Infrastructure", sectionNumber: "15.1" },
+  { id: "impl_water",       label: "Water Supply Infrastructure",               sectionNumber: "15.2" },
+  { id: "impl_street",      label: "Street Pavements and Embankment Works",     sectionNumber: "15.3" },
+  { id: "impl_drainage",    label: "Integration of Hand Pump Drainage",         sectionNumber: "15.4" },
+  { id: "impl_engagement",  label: "Community Engagement and Finalization",      sectionNumber: "15.5" },
+];
+
+export const MANAGEMENT_FIELD_DEFS = [
+  { id: "mgmt_project_committee", label: "Project Committee/Procurement Committee", sectionNumber: "16.1" },
+  { id: "mgmt_maintenance",       label: "Maintenance Committee",                   sectionNumber: "16.2" },
+  { id: "mgmt_funds",             label: "Funds Transfer",                          sectionNumber: "16.3" },
+  { id: "mgmt_monitoring",        label: "Monitoring",                              sectionNumber: "16.4.1" },
+  { id: "mgmt_evaluation",        label: "Evaluation",                              sectionNumber: "16.4.2" },
+];
+export const STAKEHOLDERS_FIELD_DEFS = [
+  { id: "stakeholders_social_org", label: "Social Organization", sectionNumber: "17.1" },
+  { id: "stakeholders_gov_bodies", label: "Government Bodies",   sectionNumber: "17.2" },
+];
+
+export const OTHER_BENEFITS_FIELD_DEFS = [
+  { id: "other_project_benefits", label: "", sectionNumber: "" },
+];
+
+export const ENV_SOCIAL_CHECKLIST_FIELD_DEFS = [
+  { id: "env_social_checklist", label: "", sectionNumber: "" },
+];
+
+export const ES_SIGNOFF_FIELD_DEFS = [
+  { id: "es_screening_signoff", label: "", sectionNumber: "" },
+];
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Legacy AI generation prompts (kept for PlaceholderTab — not used by LLM hook)

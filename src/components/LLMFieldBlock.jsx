@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import {
   Pencil, Check, X, Sparkles, RefreshCw, AlertCircle,
@@ -30,7 +29,7 @@ import Superscript from "@tiptap/extension-superscript";
 import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
  
-// ── Toolbar primitives (re-use existing CSS classes from VillageProfile.css) ─
+// ── Toolbar primitives ──
 function Btn({ onClick, active, disabled, title, children }) {
   return (
     <button
@@ -39,6 +38,7 @@ function Btn({ onClick, active, disabled, title, children }) {
       disabled={disabled}
       title={title}
       type="button"
+      
       className={`ife-btn${active ? " ife-btn--active" : ""}`}
     >
       {children}
@@ -48,15 +48,15 @@ function Btn({ onClick, active, disabled, title, children }) {
 function Sep() { return <div className="ife-sep" />; }
 function Label({ children }) { return <span className="ife-label">{children}</span>; }
  
-// ── Full TipTap inline editor ─────────────────────────────────────────────────
+// ── Full TipTap inline editor ──
 function InlineEditor({ value, onChange, onSave, onCancel }) {
   const imageInputRef = useRef(null);
   const isLocalEdit = useRef(false);
- const ItalicExtension = BaseItalic.extend({
-  renderHTML({ HTMLAttributes }) {
-    return ["em", { ...HTMLAttributes, style: "font-style: italic" }, 0];
-  },
-});
+  const ItalicExtension = BaseItalic.extend({
+    renderHTML({ HTMLAttributes }) {
+      return ["em", { ...HTMLAttributes, style: "font-style: italic" }, 0];
+    },
+  });
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3, 4] }, gapcursor: false }),
@@ -218,21 +218,21 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
         <Btn onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()} title="Redo"><Redo size={12} /></Btn>
  
         {/* Save / Cancel — always visible in edit mode */}
-        <div style={{ marginLeft: "auto", display: "flex", gap: 6 }}>
+        {/* <div style={{ marginLeft: "auto", display: "flex", gap: 6 }}>
           <button onClick={onCancel} type="button" className="btn-cancel-edit">
             <X size={12} /> Cancel
           </button>
           <button onClick={onSave} type="button" className="btn-save-edit">
             <Check size={12} /> Save
           </button>
-        </div>
+        </div> */}
       </div>
-      <EditorContent editor={editor} className="tiptap-simple" style={{ padding: "16px 24px", minHeight: 120 }} />
+     <EditorContent editor={editor} className="pdd-content" style={{ padding: "16px 24px", minHeight: 300 }} />
     </div>
   );
 }
  
-// ── Skeleton loader shown while API is in flight ──────────────────────────────
+// ── Skeleton loader ──
 function SkeletonLoader() {
   return (
     <div style={{ padding: "16px 0" }}>
@@ -261,23 +261,21 @@ function SkeletonLoader() {
   );
 }
  
-// ── Main exported component ───────────────────────────────────────────────────
+// ── Main exported component ──
 export default function LLMFieldBlock({
   fieldId,
   label,
-  sectionNumber,   // e.g. "1.1.1" — displayed as h3 prefix
-  html,            // current content (from App state)
-  loading,         // boolean — API in flight
-  error,           // string | null
-  onGenerate,      // () => void — triggers API call
+  sectionNumber,
+  html,
+  loading,
+  error,
+  onGenerate,
   onChange,
-  hideGenerateBtn,       // (html: string) => void — syncs edits back to App state
+  hideGenerateBtn,
 }) {
   const [editing, setEditing] = useState(false);
-  // draft tracks in-progress edits; initialised from prop on each edit open
   const [draft, setDraft] = useState(html || "");
  
-  // Keep draft in sync if parent pushes new content (e.g. after generate)
   useEffect(() => {
     if (!editing) setDraft(html || "");
   }, [html, editing]);
@@ -314,7 +312,6 @@ export default function LLMFieldBlock({
           color: "#1d4ed8",
           margin: 0,
           letterSpacing: "0.025em",
-          // paddingLeft: 12,
           display: "flex",
           alignItems: "center",
           gap: 8,
@@ -324,11 +321,7 @@ export default function LLMFieldBlock({
               fontFamily: "monospace",
               fontSize: 14,
               fontWeight: 700,
-              // background: "linear-gradient(135deg, #eff6ff, #eef2ff)",
               color: "#1d4ed8",
-              // border: "1px solid rgba(147,197,253,0.6)",
-              // borderRadius: 6,
-              // padding: "2px 7px",
               flexShrink: 0,
             }}>
               {sectionNumber}
@@ -350,11 +343,17 @@ export default function LLMFieldBlock({
               Generating…
               <style>{`@keyframes llm-btn-spin { to { transform: rotate(360deg); } }`}</style>
             </button>
-          ) : editing ? (
-            /* Edit mode: Save + Cancel are inside InlineEditor toolbar — nothing here */
-            null
-          ) : (
-            <div style={{ display: "flex", gap: 6 }}>
+                ) : editing ? (
+                <div style={{ display: "flex", gap: 6 }}>
+                  <button onClick={handleCancel} type="button" className="btn-cancel-edit">
+                    <X size={12} /> Cancel
+                  </button>
+                  <button onClick={handleSave} type="button" className="btn-save-edit">
+                    <Check size={12} /> Save
+                  </button>
+                </div>
+              ) : (
+                <div style={{ display: "flex", gap: 6 }}>
               {!hideGenerateBtn && (
                 <button
                   onClick={onGenerate}
@@ -381,9 +380,10 @@ export default function LLMFieldBlock({
                   )}
                 </button>
               )}
-              {!isEmpty && !loading && (   // ← hide Edit button while loading
+              {/* Edit button – always shown when not loading */}
+              {!loading && (
                 <button onClick={handleEditOpen} type="button" className="btn-edit">
-                  <Pencil size={10} /> Edit
+                  <Pencil size={10} /> {isEmpty ? "Edit" : "Edit"}
                 </button>
               )}
             </div>
@@ -415,39 +415,23 @@ export default function LLMFieldBlock({
           onCancel={handleCancel}
         />
       ) : isEmpty ? (
-        /* Empty placeholder */
+        /* Empty placeholder – no inline "Write manually" button */
         <div style={{
           padding: "20px 16px",
           background: "#fafaf9",
           border: "1.5px dashed #d6d3d1",
+          minHeight: "150px",
           borderRadius: 8,
           textAlign: "center",
         }}>
-          <Sparkles size={20} style={{ color: "#a8a29e", marginBottom: 8 }} />
           <p style={{ fontSize: 13, color: "#a8a29e", fontStyle: "italic", margin: 0 }}>
-          {hideGenerateBtn
-              ? <>No content yet. Click <strong style={{ color: "#00529d" }}>Write manually</strong> to add content.</>
-              : <>No content yet. Click <strong style={{ color: "#3b82f6" }}>Generate</strong> to create with AI, or <strong style={{ color: "#00529d" }}>Edit</strong> to write manually.</>
-            }
+            No content yet.
           </p>
-          {/* Manual edit option even when empty */}
-          <button
-            onClick={handleEditOpen}
-            type="button"
-            style={{
-              marginTop: 10, padding: "4px 12px", fontSize: 11, fontWeight: 600,
-              borderRadius: 4, border: "1px solid #d6d3d1", background: "#fff",
-              cursor: "pointer", color: "#57534e", fontFamily: "inherit",
-            }}
-          >
-            <Pencil size={10} style={{ marginRight: 4 }} />
-            Write manually
-          </button>
         </div>
       ) : (
         /* Read-mode */
         <div
-          className="field-read-content pdd-content-container"
+          className="pdd-content"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       )}

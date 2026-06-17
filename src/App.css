@@ -202,7 +202,7 @@ body {
 }
 
 .empty-text {
-  text-align: center;
+  text-align: flex-start;
   font-size: 13.5px;
   color: var(--text-muted);
   font-style: italic;
@@ -458,11 +458,150 @@ body {
   text-transform: none;
   letter-spacing: 0;
 }
-.field-read-content img {
-  max-width: 420px;
+/* ── Unified content styling ── */
+.pdd-content,
+.pdd-content .ProseMirror {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #44403c;
+}
+
+/* Paragraphs */
+.pdd-content p,
+.pdd-content .ProseMirror p {
+  font-size: 14px;
+  line-height: 1.85;
+  text-align: justify;
+  margin: 0 0 12px;
+  padding-left: 12px;
+  color: #44403c;
+}
+
+/* Headings (h1–h4) – match your document structure */
+.pdd-content h1,
+.pdd-content .ProseMirror h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 18px 0 8px;
+  border-bottom: 2px solid #1d4ed8;
+  padding-bottom: 4px;
+}
+.pdd-content h2,
+.pdd-content .ProseMirror h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0c0a09;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 24px 0 12px;
+}
+.pdd-content h3,
+.pdd-content .ProseMirror h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin: 14px 0 6px;
+  padding-left: 12px;
+}
+.pdd-content h4,
+.pdd-content .ProseMirror h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 14px 0 4px;
+  padding-left: 12px;
+}
+
+/* Lists */
+.pdd-content ul,
+.pdd-content .ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.pdd-content li,
+.pdd-content .ProseMirror li {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+/* Tables – PDF‑report style */
+.pdd-content table,
+.pdd-content .ProseMirror table {
   width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+.pdd-content th,
+.pdd-content .ProseMirror th {
+  background: #1b87ec;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 14px;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+  min-height: 2.5rem; 
+}
+.pdd-content th:last-child,
+.pdd-content .ProseMirror th:last-child {
+  border-right: none;
+}
+.pdd-content td,
+.pdd-content .ProseMirror td {
+  padding: 8px 14px;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+  color: #1a1a2e;
+  min-height: 2.5rem; 
+}
+.pdd-content td:last-child,
+.pdd-content .ProseMirror td:last-child {
+  border-right: none;
+}
+.pdd-content tr:nth-child(odd) td,
+.pdd-content .ProseMirror tr:nth-child(odd) td {
+  background: #ffffff;
+}
+.pdd-content tr:nth-child(even) td,
+.pdd-content .ProseMirror tr:nth-child(even) td {
+  background: #f0f4f8;
+}
+
+/* Images */
+.pdd-content img,
+.pdd-content .ProseMirror img {
+  max-width: 95%;
+  width: auto;
   height: auto;
-  border-radius: 8px;
-  margin: 12px auto;
   display: block;
+  margin: 16px auto;
+  border-radius: 4px;
+}
+
+/* Inline elements */
+.pdd-content strong,
+.pdd-content .ProseMirror strong {
+  font-weight: 700;
+  color: #1c1917;
+}
+.pdd-content em,
+.pdd-content .ProseMirror em {
+  font-style: italic;
 }

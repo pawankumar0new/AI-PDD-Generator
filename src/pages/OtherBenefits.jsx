@@ -1,21 +1,9 @@
-/**
- * SocialEnvironmental.jsx — Section 7: Social & Environmental Integration
- * ─────────────────────────────────────────────────────────────────────────────
- * Now uses a single "Generate All" button for the entire section.
- * Individual field‑generate buttons are hidden.
- * Headings styled via App.css (.pdd-content-container h2) for consistency.
- */
-
 import React, { useCallback } from "react";
 import { Sparkles } from "lucide-react";
 import LLMFieldBlock from "../components/LLMFieldBlock";
-import { SOCIAL_FIELD_DEFS, ENV_FIELD_DEFS, FIELD_API_PAYLOAD } from "../data/pddStructure";
+import { OTHER_BENEFITS_FIELD_DEFS, FIELD_API_PAYLOAD } from "../data/pddStructure";
 import "./SectionPages.css";
 
-// ── Flatten all fields from both subsections ───────────────────────────────
-const ALL_SOCIAL_ENV_FIELDS = [...SOCIAL_FIELD_DEFS, ...ENV_FIELD_DEFS];
-
-// ── "Generate All" button (identical to Sections 14, 15, 16) ──────────────
 function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
   const isAnyLoading = fields.some((f) => fieldLoading[f.id]);
 
@@ -53,23 +41,23 @@ function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
             <span style={{
               display: "inline-block", width: 11, height: 11,
               border: "2px solid rgba(255,255,255,0.4)", borderTopColor: "#fff",
-              borderRadius: "50%", animation: "sec7-spin 0.7s linear infinite",
+              borderRadius: "50%", animation: "sec18-spin 0.7s linear infinite",
             }} />
             Generating…
           </>
         ) : (
           <>
             <Sparkles size={11} strokeWidth={1.75} />
-            Generate All — Section 7
+            Generate — {label}
           </>
         )}
-        <style>{`@keyframes sec7-spin { to { transform: rotate(360deg); } }`}</style>
+        <style>{`@keyframes sec18-spin { to { transform: rotate(360deg); } }`}</style>
       </button>
     </div>
   );
 }
 
-export default function SocialEnvironmental({
+export default function OtherBenefits({
   village,
   fieldContent,
   fieldLoading,
@@ -79,37 +67,17 @@ export default function SocialEnvironmental({
 }) {
   return (
     <div className="pdd-content-container">
-      {/* ── Heading row with Generate All button ── */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-        <h1 style={{ margin: 0 }}>7. Social &amp; Environmental Integration</h1>
+        <h1 style={{ margin: 0 }}>18. Other Project Benefits</h1>
         <SectionGenerateBtn
-          fields={ALL_SOCIAL_ENV_FIELDS}
+          fields={OTHER_BENEFITS_FIELD_DEFS}
           fieldLoading={fieldLoading}
           onGenerate={onGenerate}
-          label="Section 7"
+          label="Section 18"
         />
       </div>
 
-      {/* ── 7.1 Social Integration ── */}
-      <h2 style={{ marginTop: 24 }}>7.1  Social Integration</h2>
-      {SOCIAL_FIELD_DEFS.map((field) => (
-        <LLMFieldBlock
-          key={field.id}
-          fieldId={field.id}
-          label={field.label}
-          sectionNumber={field.sectionNumber}
-          html={fieldContent[field.id] || ""}
-          loading={fieldLoading[field.id] || false}
-          error={fieldErrors[field.id] || null}
-          onGenerate={() => onGenerate(field.id, FIELD_API_PAYLOAD[field.id])}
-          onChange={(html) => onChange(field.id, html)}
-          hideGenerateBtn
-        />
-      ))}
-
-      {/* ── 7.2 Environmental Integration ── */}
-      <h2 style={{ marginTop: 36 }}>7.2  Environmental Integration</h2>
-      {ENV_FIELD_DEFS.map((field) => (
+      {OTHER_BENEFITS_FIELD_DEFS.map((field) => (
         <LLMFieldBlock
           key={field.id}
           fieldId={field.id}

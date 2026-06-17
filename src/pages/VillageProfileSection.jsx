@@ -1,97 +1,70 @@
 /**
  * VillageProfileSection.jsx — Section 6: Village Profile
  * ─────────────────────────────────────────────────────────────────────────────
- * Replaces the hardcoded PROFILE_ROWS table with LLMFieldBlock per section.
- * Each sub-section field has its own Generate button.
- *
- * Props received from App.jsx:
- *   village        {string}
- *   fieldContent   { [fieldId]: htmlString }
- *   fieldLoading   { [fieldId]: boolean }
- *   fieldErrors    { [fieldId]: string|null }
- *   onGenerate     (fieldId, apiPayload) => void
- *   onChange       (fieldId, html) => void
+ * Now uses a single "Generate All" button for the entire section.
+ * Individual field‑generate buttons are hidden.
+ * Sub‑sections are displayed with plain h2 headings (no collapsible wrappers).
  */
 
-import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import React, { useCallback } from "react";
+import { Sparkles } from "lucide-react";
 import LLMFieldBlock from "../components/LLMFieldBlock";
 import { VILLAGE_PROFILE_SECTIONS, FIELD_API_PAYLOAD } from "../data/pddStructure";
 import "./SectionPages.css";
 
-// ── Collapsible section wrapper ───────────────────────────────────────────────
-function ProfileSection({ section, fieldContent, fieldLoading, fieldErrors, onGenerate, onChange }) {
-  const [collapsed, setCollapsed] = useState(false);
+// ── Flatten all fields from all subsections ────────────────────────────────
+const ALL_PROFILE_FIELDS = VILLAGE_PROFILE_SECTIONS.flatMap((section) => section.fields);
 
-  const filledCount = section.fields.filter((f) => fieldContent[f.id]).length;
-  const totalCount  = section.fields.length;
-  const allFilled   = filledCount === totalCount;
+// ── "Generate All" button (same as Sections 8, 9, 10) ──────────────────────
+function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
+  const isAnyLoading = fields.some((f) => fieldLoading[f.id]);
+
+  const handleGenerateAll = useCallback(async () => {
+    for (const field of fields) {
+      await new Promise((resolve) => {
+        onGenerate(field.id, FIELD_API_PAYLOAD[field.id]);
+        setTimeout(resolve, 300);
+      });
+    }
+  }, [fields, onGenerate]);
 
   return (
-    <div style={{ marginBottom: 24 }}>
-      {/* Section heading row */}
-      <div
-        onClick={() => setCollapsed((v) => !v)}
+    <div style={{ display: "flex", justifyContent: "flex-end", margin: 0 }}>
+      <button
+        onClick={handleGenerateAll}
+        disabled={isAnyLoading}
+        type="button"
         style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          cursor: "pointer", padding: "10px 14px",
-          background: "linear-gradient(to right, #eff6ff, #f0f9ff)",
-          border: "1px solid #bfdbfe",
-          borderRadius: collapsed ? 8 : "8px 8px 0 0",
-          userSelect: "none",
+          display: "flex", alignItems: "center", gap: 6,
+          padding: "6px 16px", fontSize: 12, fontWeight: 600,
+          borderRadius: 4, border: "none",
+          cursor: isAnyLoading ? "not-allowed" : "pointer",
+          color: "#fff",
+          background: "linear-gradient(to right, #3b82f6, #1e40af)",
+          fontFamily: "inherit",
+          opacity: isAnyLoading ? 0.7 : 1,
+          transition: "opacity 0.15s",
         }}
+        onMouseEnter={(e) => { if (!isAnyLoading) e.currentTarget.style.opacity = "0.88"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.opacity = isAnyLoading ? "0.7" : "1"; }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{
-            fontFamily: "monospace", fontSize: 11, fontWeight: 900,
-            background: "#1d4ed8", color: "#fff",
-            borderRadius: 5, padding: "2px 8px",
-          }}>
-            {section.id}
-          </span>
-          <h2 style={{
-            margin: 0, fontSize: 13, fontWeight: 700,
-            color: "#1e3a8a", textTransform: "uppercase", letterSpacing: "0.08em",
-          }}>
-            {section.title.replace(/^\d+\.\d+\s+/, "")}
-          </h2>
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{
-            fontSize: 11, fontWeight: 700,
-            color: allFilled ? "#15803d" : "#6b7280",
-            background: allFilled ? "#dcfce7" : "#f3f4f6",
-            borderRadius: 999, padding: "2px 8px",
-          }}>
-            {filledCount}/{totalCount} filled
-          </span>
-          {collapsed ? <ChevronDown size={14} color="#6b7280" /> : <ChevronUp size={14} color="#6b7280" />}
-        </div>
-      </div>
-
-      {/* Fields */}
-      {!collapsed && (
-        <div style={{
-          border: "1px solid #bfdbfe", borderTop: "none",
-          borderRadius: "0 0 8px 8px", padding: "20px 20px 8px",
-          background: "#fff",
-        }}>
-          {section.fields.map((field) => (
-            <LLMFieldBlock
-              key={field.id}
-              fieldId={field.id}
-              label={field.label}
-              sectionNumber={field.sectionNumber}
-              html={fieldContent[field.id] || ""}
-              loading={fieldLoading[field.id] || false}
-              error={fieldErrors[field.id] || null}
-              onGenerate={() => onGenerate(field.id, FIELD_API_PAYLOAD[field.id])}
-              onChange={(html) => onChange(field.id, html)}
-            />
-          ))}
-        </div>
-      )}
+        {isAnyLoading ? (
+          <>
+            <span style={{
+              display: "inline-block", width: 11, height: 11,
+              border: "2px solid rgba(255,255,255,0.4)", borderTopColor: "#fff",
+              borderRadius: "50%", animation: "sec6-spin 0.7s linear infinite",
+            }} />
+            Generating…
+          </>
+        ) : (
+          <>
+            <Sparkles size={11} strokeWidth={1.75} />
+            Generate All — Section 6
+          </>
+        )}
+        <style>{`@keyframes sec6-spin { to { transform: rotate(360deg); } }`}</style>
+      </button>
     </div>
   );
 }
@@ -107,23 +80,44 @@ export default function VillageProfileSection({
 }) {
   return (
     <div className="pdd-content-container">
-      <h1>6. Village Profile</h1>
-      <p style={{ fontSize: 13, color: "#78716c", marginBottom: 20, paddingLeft: 12 }}>
-        Village: <strong style={{ color: "#1a3e74" }}>{village}</strong>. Click{" "}
-        <strong style={{ color: "#3b82f6" }}>Generate</strong> on each field to populate with AI,
-        or <strong style={{ color: "#00529d" }}>Edit</strong> to write manually.
-      </p>
-
-      {VILLAGE_PROFILE_SECTIONS.map((section) => (
-        <ProfileSection
-          key={section.id}
-          section={section}
-          fieldContent={fieldContent}
+      {/* ── Heading row with Generate All button ── */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+        <h1 style={{ margin: 0 }}>6. Village Profile</h1>
+        <SectionGenerateBtn
+          fields={ALL_PROFILE_FIELDS}
           fieldLoading={fieldLoading}
-          fieldErrors={fieldErrors}
           onGenerate={onGenerate}
-          onChange={onChange}
+          label="Section 6"
         />
+      </div>
+
+      {/* <p style={{ fontSize: 13, color: "#78716c", marginBottom: 20, paddingLeft: 12 }}>
+        Village: <strong style={{ color: "#1a3e74" }}>{village}</strong>. Click{" "}
+        <strong style={{ color: "#3b82f6" }}>Generate All</strong> to populate every field with AI.
+        You can still <strong style={{ color: "#00529d" }}>Edit</strong> each field manually after generation.
+      </p> */}
+
+      {/* ── Subsections ── */}
+      {VILLAGE_PROFILE_SECTIONS.map((section, index) => (
+        <div key={section.id}>
+          <h2 style={{ marginTop: index === 0 ? 24 : 36 }}>
+            {section.title}
+          </h2>
+          {section.fields.map((field) => (
+            <LLMFieldBlock
+              key={field.id}
+              fieldId={field.id}
+              label={field.label}
+              sectionNumber={field.sectionNumber}
+              html={fieldContent[field.id] || ""}
+              loading={fieldLoading[field.id] || false}
+              error={fieldErrors[field.id] || null}
+              onGenerate={() => onGenerate(field.id, FIELD_API_PAYLOAD[field.id])}
+              onChange={(html) => onChange(field.id, html)}
+              hideGenerateBtn
+            />
+          ))}
+        </div>
       ))}
     </div>
   );

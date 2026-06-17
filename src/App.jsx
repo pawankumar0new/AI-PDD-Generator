@@ -7,6 +7,20 @@ import SocialEnvironmental from "./pages/SocialEnvironmental";
 import InfrastructureAssessment from "./pages/InfrastructureAssessment";
 import DesignCriteria from "./pages/DesignCriteria";
 import ProposedInfrastructure from "./pages/ProposedInfrastructure";
+import RiskMatrix from "./pages/RiskMatrix";
+import QuantitiesCostEstimates from "./pages/QuantitiesCostEstimates";
+import OperationMaintenance from "./pages/OperationMaintenance";
+import EconomicAnalysis from "./pages/EconomicAnalysis";
+import ProjectImplementation from "./pages/ProjectImplementation";
+import ProjectSummary from "./pages/ProjectSummary";
+import CostDetail from "./pages/CostDetail";
+import SubComponents from "./pages/SubComponents";
+import OmCost from "./pages/OmCost";
+import Stakeholders from "./pages/Stakeholders";
+import OtherBenefits from "./pages/OtherBenefits";
+import EnvironmentalSocialReview from "./pages/EnvironmentalSocialReview";
+import ESSignoff from "./pages/ESSignoff";
+import ProjectManagement from "./pages/ProjectManagement";
 // import { VILLAGES, TABS } from "./data/pddStructure";
 import { useLLMGenerate } from "./hooks/useLLMGenerate";
 import { MapPin, ChevronDown } from "lucide-react";
@@ -43,6 +57,58 @@ export default function App() {
 
   const renderTabContent = () => {
     if (!selectedVillage) return null;
+
+    if (activeTab === 1) {
+      return (
+        <ProjectSummary
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 2) {
+      return (
+        <CostDetail
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 3) {
+      return (
+        <SubComponents
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 4) {
+      return (
+        <OmCost
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
 
     // ── Section 5: Village Background ────────────────────────────────────────
     if (activeTab === 5) {
@@ -126,6 +192,136 @@ export default function App() {
       );
     }
 
+    if (activeTab === 11) {
+      return (
+        <RiskMatrix
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 12) {
+      return (
+        <QuantitiesCostEstimates
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 13) {
+      return (
+        <OperationMaintenance
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+    
+    if (activeTab === 14) {
+      return (
+        <EconomicAnalysis
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 15) {
+      return (
+        <ProjectImplementation
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 16) {
+      return (
+        <ProjectManagement
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 17) {
+      return (
+        <Stakeholders
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 18) {
+      return (
+        <OtherBenefits
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 19) {
+      return (
+        <EnvironmentalSocialReview
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
+    if (activeTab === 20) {
+      return (
+        <ESSignoff
+          village={selectedVillage}
+          fieldContent={villageContent}
+          fieldLoading={loading}
+          fieldErrors={errors}
+          onGenerate={handleGenerate}
+          onChange={handleChange}
+        />
+      );
+    }
+
     // ── All other sections: PlaceholderTab ────────────────────────────────────
     const tab = TABS.find((t) => t.id === activeTab);
     return (
@@ -189,7 +385,7 @@ export default function App() {
           </div>
         ) : (
           <div className="empty-state">
-            <div className="empty-grid">
+            {/* <div className="empty-grid">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="empty-card" style={{ animationDelay: `${i * 0.08}s` }}>
                   <div className="empty-card-bar" />
@@ -197,7 +393,7 @@ export default function App() {
                   <div className="empty-card-bar medium" />
                 </div>
               ))}
-            </div>
+            </div> */}
             <p className="empty-text">Select a village above to start generating your PDD</p>
           </div>
         )}
