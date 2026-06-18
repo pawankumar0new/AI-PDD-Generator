@@ -173,7 +173,9 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
         {editor.isActive("link") && (
           <Btn onClick={() => editor.chain().focus().unsetLink().run()} title="Unlink"><Unlink size={12} /></Btn>
         )}
-        <ImageIcon size={12} />
+        <Btn onClick={() => imageInputRef.current?.click()} title="Insert image">
+          <ImageIcon size={12} />
+        </Btn>
         <input ref={imageInputRef} type="file" accept="image/*" className="ife-file-input" onChange={handleImageUpload} />
 
         <Sep />

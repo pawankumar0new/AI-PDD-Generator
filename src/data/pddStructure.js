@@ -96,10 +96,10 @@ export const VILLAGE_PROFILE_SECTIONS = [
 export const VILLAGE_ID_MAP = {
   "Bahadur khskheli-Fateh Pur": "054ff8aa-285d-4e44-89bf-d91ada9da2ca", // ← add this (matches test payload)
   "Bahadur Khaskheli": "054ff8aa-285d-4e44-89bf-d91ada9da2ca",
-  "Noor Muhammad Jaskani": "0ccc8851-61e3-4eb2-b007-1fcaf18d3233",
-  "Ali Bux Khoso": "replace-with-real-uuid",
+  "Noor Muhammad Jaskani": "replace-with-real-uuid",
+  "Ali Bux Khoso": "cc1f3396-7c78-4c09-a201-a1829188b500",
   "Muhammad Khan Morio": "replace-with-real-uuid",
-  "Ghulam Nabi Shar": "replace-with-real-uuid",
+  "Ghulam Nabi Shar": "976ca502-c800-4734-b294-029e302a72e2",
 };
 export const FIELD_API_PAYLOAD = {
 

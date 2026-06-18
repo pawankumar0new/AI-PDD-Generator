@@ -330,54 +330,130 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* ── Toolbar ── */
+/* ── Inline editor toolbar ── */
 .ife-toolbar {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 2px;
-  padding: 7px 12px;
-  border-bottom: 1px solid #f0f0ef;
-  background: rgba(250, 250, 249, 0.85);
+  gap: 3px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(231, 229, 228, 0.5);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* ── Toolbar button ── */
 .ife-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  display: flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border: none;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.12s ease, color 0.12s ease;
+  transition: all 0.15s ease;
   background: transparent;
-  color: #57534e;
+  color: #4b5563;
 }
 
 .ife-btn:hover:not(:disabled) {
-  background: rgba(231, 229, 228, 0.7);
-  color: #1c1917;
+  background: rgba(59, 130, 246, 0.08);
+  color: #1e40af;
+  transform: scale(1.05);
 }
 
 .ife-btn--active {
   background: #3b82f6;
   color: #ffffff;
-  box-shadow: 0 1px 4px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.35);
 }
-.ife-btn--active:hover { background: #3b82f6; color: #ffffff; }
 
-.ife-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.ife-btn--active:hover {
+  background: #2563eb;
+  color: #ffffff;
+  transform: scale(1.05);
+}
 
-/* ── Separator ── */
+.ife-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .ife-sep {
   width: 1px;
-  height: 16px;
-  background: #e7e5e4;
-  margin: 0 3px;
+  height: 22px;
+  background: #e5e7eb;
+  margin: 0 4px;
   flex-shrink: 0;
+}
+
+.ife-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ── Colour swatches ── */
+.ife-color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ife-color-swatch:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.ife-color-remove {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.ife-color-remove:hover {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.ife-file-input {
+  display: none;
+}
+
+/* ── Editor container ── */
+.inline-field-editor {
+  margin-top: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(229, 231, 235, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  font-family: 'Inter', sans-serif;
 }
 
 /* ── Editor body — TipTap typography ── */
