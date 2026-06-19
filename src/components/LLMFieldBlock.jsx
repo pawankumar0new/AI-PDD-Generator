@@ -274,6 +274,7 @@ export default function LLMFieldBlock({
   onGenerate,
   onChange,
   hideGenerateBtn,
+  headingLevel = "h3",
 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(html || "");
@@ -302,35 +303,44 @@ export default function LLMFieldBlock({
   };
  
   const isEmpty = !html || html.trim() === "";
+  const HeadingTag = headingLevel;
  
   return (
     <div className="field-block-vp" style={{ marginBottom: 32 }}>
  
       {/* ── Heading row ── */}
       <div className="field-heading-row">
-        <h3 style={{
-          fontSize: 14,
-          fontWeight: 700,
-          color: "#1d4ed8",
-          margin: 0,
-          letterSpacing: "0.025em",
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-        }}>
-          {sectionNumber && (
-            <span style={{
-              fontFamily: "monospace",
+        <HeadingTag
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            ...(headingLevel === "h3" && {
               fontSize: 14,
               fontWeight: 700,
               color: "#1d4ed8",
-              flexShrink: 0,
-            }}>
+              margin: 0,
+              letterSpacing: "0.025em",
+            }),
+          }}
+        >
+          {sectionNumber && (
+            <span
+              style={{
+                flexShrink: 0,
+                ...(headingLevel === "h3" && {
+                  fontFamily: "monospace",
+                  fontSize: 14,
+                  fontWeight: 700,
+                  color: "#1d4ed8",
+                }),
+              }}
+            >
               {sectionNumber}
             </span>
           )}
           {label}
-        </h3>
+        </HeadingTag>
  
         {/* Action buttons — right side */}
         <div className="field-heading-actions">

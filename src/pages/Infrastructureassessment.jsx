@@ -1,7 +1,8 @@
 /**
  * InfrastructureAssessment.jsx — Section 8: Infrastructure Assessment and Gaps
  * ─────────────────────────────────────────────────────────────────────────────
- * Single "Generate All" button at the top (inline with heading) generates all fields sequentially.
+ * Now includes "Generate" buttons for each sub‑section (8.1–8.5) in addition
+ * to the overall "Generate All" button.
  */
 
 import React, { useCallback } from "react";
@@ -17,7 +18,7 @@ import {
 } from "../data/pddStructure";
 import "./SectionPages.css";
 
-// ── Helper: Generate All button for the ENTIRE section ──────────────────
+// ── "Generate All" button for the entire section ──────────────────────────
 function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
   const isAnyLoading = fields.some((f) => fieldLoading[f.id]);
 
@@ -71,6 +72,60 @@ function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
   );
 }
 
+// ── NEW: Sub‑section Generate button ──────────────────────────────────────
+function SubSectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
+  const isAnyLoading = fields.some((f) => fieldLoading[f.id]);
+
+  const handleGenerateAll = useCallback(async () => {
+    for (const field of fields) {
+      await new Promise((resolve) => {
+        onGenerate(field.id, FIELD_API_PAYLOAD[field.id]);
+        setTimeout(resolve, 300);
+      });
+    }
+  }, [fields, onGenerate]);
+
+  return (
+    <div style={{ display: "flex", justifyContent: "flex-end", margin: 0 }}>
+      <button
+        onClick={handleGenerateAll}
+        disabled={isAnyLoading}
+        type="button"
+        style={{
+          display: "flex", alignItems: "center", gap: 6,
+          padding: "4px 14px", fontSize: 11.5, fontWeight: 600,
+          borderRadius: 4, border: "none",
+          cursor: isAnyLoading ? "not-allowed" : "pointer",
+          color: "#fff",
+          background: "linear-gradient(to right, #3b82f6, #1e40af)",
+          fontFamily: "inherit",
+          opacity: isAnyLoading ? 0.7 : 1,
+          transition: "opacity 0.15s",
+        }}
+        onMouseEnter={(e) => { if (!isAnyLoading) e.currentTarget.style.opacity = "0.88"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.opacity = isAnyLoading ? "0.7" : "1"; }}
+      >
+        {isAnyLoading ? (
+          <>
+            <span style={{
+              display: "inline-block", width: 11, height: 11,
+              border: "2px solid rgba(255,255,255,0.4)", borderTopColor: "#fff",
+              borderRadius: "50%", animation: "subsec-spin 0.7s linear infinite",
+            }} />
+            Generating…
+          </>
+        ) : (
+          <>
+            <Sparkles size={11} strokeWidth={1.75} />
+            Generate {label}
+          </>
+        )}
+        <style>{`@keyframes subsec-spin { to { transform: rotate(360deg); } }`}</style>
+      </button>
+    </div>
+  );
+}
+
 export default function InfrastructureAssessment({
   village,
   fieldContent,
@@ -89,7 +144,7 @@ export default function InfrastructureAssessment({
 
   return (
     <div className="pdd-content-container">
-      {/* ── Heading row with button inline ── */}
+      {/* ── Heading row with Generate All button ── */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
         <h1 style={{ margin: 0 }}>8. Infrastructure Assessment and Gaps</h1>
         <SectionGenerateBtn
@@ -101,7 +156,15 @@ export default function InfrastructureAssessment({
       </div>
 
       {/* ── 8.1 Existing Water Supply System ── */}
-      <h2 style={{ marginTop: 24 }}>8.1 Existing Water Supply System</h2>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 24, marginBottom: 16 }}>
+        <h2 style={{ margin: 0 }}>8.1 Existing Water Supply System</h2>
+        <SubSectionGenerateBtn
+          fields={INFRA_WATER_FIELD_DEFS}
+          fieldLoading={fieldLoading}
+          onGenerate={onGenerate}
+          label="8.1"
+        />
+      </div>
       {INFRA_WATER_FIELD_DEFS.map((field) => (
         <LLMFieldBlock
           key={field.id}
@@ -118,7 +181,15 @@ export default function InfrastructureAssessment({
       ))}
 
       {/* ── 8.2 Existing Sanitation System ── */}
-      <h2 style={{ marginTop: 36 }}>8.2 Existing Sanitation System</h2>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 36, marginBottom: 16 }}>
+        <h2 style={{ margin: 0 }}>8.2 Existing Sanitation System</h2>
+        <SubSectionGenerateBtn
+          fields={INFRA_SANITATION_FIELD_DEFS}
+          fieldLoading={fieldLoading}
+          onGenerate={onGenerate}
+          label="8.2"
+        />
+      </div>
       {INFRA_SANITATION_FIELD_DEFS.map((field) => (
         <LLMFieldBlock
           key={field.id}
@@ -135,7 +206,15 @@ export default function InfrastructureAssessment({
       ))}
 
       {/* ── 8.3 Existing Stormwater Drainage ── */}
-      <h2 style={{ marginTop: 36 }}>8.3 Existing Stormwater Drainage</h2>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 36, marginBottom: 16 }}>
+        <h2 style={{ margin: 0 }}>8.3 Existing Stormwater Drainage</h2>
+        <SubSectionGenerateBtn
+          fields={INFRA_DRAINAGE_FIELD_DEFS}
+          fieldLoading={fieldLoading}
+          onGenerate={onGenerate}
+          label="8.3"
+        />
+      </div>
       {INFRA_DRAINAGE_FIELD_DEFS.map((field) => (
         <LLMFieldBlock
           key={field.id}
@@ -152,7 +231,15 @@ export default function InfrastructureAssessment({
       ))}
 
       {/* ── 8.4 Existing Track Conditions ── */}
-      <h2 style={{ marginTop: 36 }}>8.4 Existing Track Conditions</h2>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 36, marginBottom: 16 }}>
+        <h2 style={{ margin: 0 }}>8.4 Existing Track Conditions</h2>
+        <SubSectionGenerateBtn
+          fields={INFRA_TRACK_FIELD_DEFS}
+          fieldLoading={fieldLoading}
+          onGenerate={onGenerate}
+          label="8.4"
+        />
+      </div>
       {INFRA_TRACK_FIELD_DEFS.map((field) => (
         <LLMFieldBlock
           key={field.id}
@@ -169,7 +256,15 @@ export default function InfrastructureAssessment({
       ))}
 
       {/* ── 8.5 Solid Waste Disposal System ── */}
-      <h2 style={{ marginTop: 36 }}>8.5 Solid Waste Disposal System in Villages</h2>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 36, marginBottom: 16 }}>
+        <h2 style={{ margin: 0 }}>8.5 Solid Waste Disposal System in Villages</h2>
+        <SubSectionGenerateBtn
+          fields={INFRA_SOLIDWASTE_FIELD_DEFS}
+          fieldLoading={fieldLoading}
+          onGenerate={onGenerate}
+          label="8.5"
+        />
+      </div>
       {INFRA_SOLIDWASTE_FIELD_DEFS.map((field) => (
         <LLMFieldBlock
           key={field.id}

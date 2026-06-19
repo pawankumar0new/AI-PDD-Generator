@@ -359,9 +359,9 @@ export const FIELD_API_PAYLOAD = {
     section_name: "Social & Environmental Integration",
     sub_section_no: "7.2",
     sub_section_name: "Environmental Integration",
-    sub_sub_section_no: "",
-    sub_sub_section_name: "",
-  },
+    sub_sub_section_no: "7.2.0",
+    sub_sub_section_name: "Environmental Integration Overview",
+},
   env_risk_climate: {
     section_no: "7",
     section_name: "Social & Environmental Integration",
@@ -378,30 +378,43 @@ export const FIELD_API_PAYLOAD = {
     sub_sub_section_no: "7.2.2",
     sub_sub_section_name: "WASH Intervention",
   },
-  env_water_supply: {
-    section_no: "7",
-    section_name: "Social & Environmental Integration",
-    sub_section_no: "7.2",
-    sub_section_name: "Environmental Integration",
-    sub_sub_section_no: "7.2.2.1",
-    sub_sub_section_name: "Water Supply System",
-  },
-  env_sanitation: {
-    section_no: "7",
-    section_name: "Social & Environmental Integration",
-    sub_section_no: "7.2",
-    sub_section_name: "Environmental Integration",
-    sub_sub_section_no: "7.2.2.2",
-    sub_sub_section_name: "Sanitation System",
-  },
-  env_hygiene_promotion: {
-    section_no: "7",
-    section_name: "Social & Environmental Integration",
-    sub_section_no: "7.2",
-    sub_section_name: "Environmental Integration",
-    sub_sub_section_no: "7.2.2.3",
-    sub_sub_section_name: "Hygiene Promotion",
-  },
+  // ── In FIELD_API_PAYLOAD ──
+
+// Replace these three entries:
+
+env_water_supply: {
+  section_no: "7",
+  section_name: "Social & Environmental Integration",
+  sub_section_no: "7.2",
+  sub_section_name: "Environmental Integration",
+  sub_sub_section_no: "7.2.2",
+  sub_sub_section_name: "WASH Intervention",
+  sub_sub_sub_section_no: "7.2.2.1",            // changed
+  sub_sub_sub_section_name: "Water Supply System",
+  // remove sub_sub_sub_* entirely
+},
+
+env_sanitation: {
+  section_no: "7",
+  section_name: "Social & Environmental Integration",
+  sub_section_no: "7.2",
+  sub_section_name: "Environmental Integration",
+  sub_sub_section_no: "7.2.2",
+  sub_sub_section_name: "WASH Intervention",
+  sub_sub_sub_section_no: "7.2.2.2",            // changed
+  sub_sub_sub_section_name: "Sanitation System",
+},
+
+env_hygiene_promotion: {
+  section_no: "7",
+  section_name: "Social & Environmental Integration",
+  sub_section_no: "7.2",
+  sub_section_name: "Environmental Integration",
+  sub_sub_section_no: "7.2.2",
+  sub_sub_section_name: "WASH Intervention",
+  sub_sub_sub_section_no: "7.2.2.3",            // changed
+  sub_sub_sub_section_name: "Hygiene Promotion",
+},
   infra_water_existing: {
     section_no: "8",
     section_name: "Infrastructure Assessment and Gaps",
@@ -1015,7 +1028,7 @@ export const SOCIAL_FIELD_DEFS = [
 ];
 
 export const ENV_FIELD_DEFS = [
-  { id: "env_overview",          label: "",  sectionNumber: "" },
+  { id: "env_overview",          label: "Overview",  sectionNumber: "7.2" },
   { id: "env_risk_climate",      label: "Environmental Risk & Climate Change",   sectionNumber: "7.2.1" },
   { id: "env_wash_intervention", label: "WASH Intervention",                     sectionNumber: "7.2.2" },
   { id: "env_water_supply",      label: "Water Supply System",                   sectionNumber: "7.2.2.1" },

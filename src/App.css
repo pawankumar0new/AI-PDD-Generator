@@ -280,8 +280,7 @@ body {
 
 /* Images */
 /* ── Image size constraint ── */
-.tiptap-simple .ProseMirror img,
-.inline-field-editor .ProseMirror img {
+.tiptap-simple .ProseMirror img {
   max-width: 420px;
   width: 100%;
   height: auto;
@@ -412,8 +411,7 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-.pdd-content-container h2,
-.pdd-content-container .inline-field-editor .ProseMirror h3 {
+.pdd-content-container h2 {
   font-size: 16px;
   font-weight: 800;
   color: #0c0a09; /* stone-900 */
@@ -424,8 +422,7 @@ body {
 }
 
 
-.pdd-content-container h3,
-.pdd-content-container .inline-field-editor .ProseMirror h3 {
+.pdd-content-container h3 {
   font-size: 14px;
   font-weight: 700;
   color: #1d4ed8; /* blue-700 */
@@ -525,6 +522,12 @@ body {
   padding-left: 28px;
   margin: 6px 0 12px;
 }
+.pdd-content ol,
+.pdd-content .ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
 .pdd-content li,
 .pdd-content .ProseMirror li {
   font-size: 14px;
@@ -537,6 +540,7 @@ body {
 .pdd-content table,
 .pdd-content .ProseMirror table {
   width: 100%;
+  table-layout: fixed !important;
   border-collapse: collapse;
   font-size: 13px;
   margin: 14px 0;

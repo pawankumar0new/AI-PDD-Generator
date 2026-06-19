@@ -239,7 +239,18 @@
   margin: 0 0 12px;
   padding-left: 12px;
 }
+.field-read-content ol,
+.pdd-content-container ol {
+  padding-left: 28px;
+  margin: 6px 0 12px;
+  list-style-type: decimal;
+}
 
+.field-read-content ul,
+.pdd-content-container ul {
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
 .field-read-content p:last-child,
 .pdd-content-container p:last-child {
   margin-bottom: 0;
@@ -498,14 +509,19 @@
 
 .inline-field-editor .ProseMirror ul {
   list-style-type: disc;
-  padding-left: 20px !important;     /* ← reduced */
-  margin: 4px 0 6px;          /* ← reduced */
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.inline-field-editor .ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 28px;
+  margin: 6px 0 12px;
 }
 .inline-field-editor .ProseMirror li {
   font-size: 13.5px;
   color: #44403c;
-  line-height: 1.4;           /* ← reduced */
-  margin-bottom: 0;           /* ← removed bottom margin */
+  line-height: 1.8;
+  margin-bottom: 6px;
   padding-left: 4px;
 }
 
@@ -526,22 +542,27 @@
 /* ── TipTap table inside inline editor ── */
 .inline-field-editor .ProseMirror table {
   width: 100%;
+  table-layout: fixed !important;
   border-collapse: collapse;
   font-size: 13px;
-  margin: 12px 0;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 .inline-field-editor .ProseMirror th {
   background: #1b87ec;
   color: #fff;
   font-weight: 700;
-  padding: 8px 12px;
+  padding: 9px 14px;
   text-align: left;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
   border-right: 1px solid rgba(255,255,255,0.15);
 }
 .inline-field-editor .ProseMirror th:last-child { border-right: none; }
 .inline-field-editor .ProseMirror td {
-  padding: 7px 12px;
+  padding: 8px 14px;
   border-top: 1px solid #e2e8f0;
   border-right: 1px solid #e2e8f0;
   vertical-align: top;
@@ -551,12 +572,14 @@
 .inline-field-editor .ProseMirror tr:nth-child(odd) td  { background: #fff; }
 .inline-field-editor .ProseMirror tr:nth-child(even) td { background: #f0f4f8; }
 
-/* ── Fixes for th > p inside TipTap ── */
+/* ── Fixes for th > p — must cover BOTH the live editor and the saved read view ── */
 .inline-field-editor .ProseMirror th p,
-.inline-field-editor .ProseMirror th p * {
+.inline-field-editor .ProseMirror th p *,
+.pdd-content th p,
+.pdd-content th p * {
   color: #ffffff !important;
   margin: 0;
-  padding: 0;
+  padding-left: 10px;
 }
 
 /* ═══════════════════════════════════════
@@ -703,7 +726,7 @@
 .field-read-content img,
 .inline-field-editor .ProseMirror img,
 .tiptap-simple .ProseMirror img {
-  width: 95%;
+  width: auto;
   max-width: 95%;
   height: auto;
   display: block;

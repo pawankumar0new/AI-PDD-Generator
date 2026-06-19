@@ -93,6 +93,7 @@ export default function ProjectManagement({
           onGenerate={() => onGenerate(field.id, FIELD_API_PAYLOAD[field.id])}
           onChange={(html) => onChange(field.id, html)}
           hideGenerateBtn
+          headingLevel="h2"
         />
       ))}
     </div>
