@@ -9,6 +9,7 @@ export const VILLAGES = [
   "Ali Bux Khoso",
   "Muhammad Khan Morio",
   "Ghulam Nabi Shar",
+  "Suleman Gerano",
 ];
 
 export const TABS = [
@@ -100,6 +101,7 @@ export const VILLAGE_ID_MAP = {
   "Ali Bux Khoso": "cc1f3396-7c78-4c09-a201-a1829188b500",
   "Muhammad Khan Morio": "replace-with-real-uuid",
   "Ghulam Nabi Shar": "976ca502-c800-4734-b294-029e302a72e2",
+  "Suleman Gerano": "bdfc6058-889d-4fa9-a53e-0a6aa2b9819d"
 };
 export const FIELD_API_PAYLOAD = {
 

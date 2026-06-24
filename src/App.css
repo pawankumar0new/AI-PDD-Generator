@@ -447,13 +447,14 @@ body {
 .pdd-content-container .inline-field-editor .ProseMirror h4 {
   font-size: 14px;
   font-weight: 700;
-  display: flex;
+ 
   color: #000000;
   text-decoration: underline;
   margin: 14px 0 4px;
   padding-left: 12px;
   text-transform: none;
   letter-spacing: 0;
+  text-align: left;
 }
 /* ── Unified content styling ── */
 .pdd-content,
@@ -513,6 +514,7 @@ body {
   text-underline-offset: 3px;
   margin: 14px 0 4px;
   padding-left: 12px;
+  text-align: left; 
 }
 
 /* Lists */
