@@ -6,29 +6,32 @@ import "./SectionPages.css";
 
 // Add this constant at the top of the file, after imports:
 
+// Add this constant at the top of the file, after imports:
+
 const PROJECT_SUMMARY_DEFAULT_HTML = `
 <p style="text-align:center;font-style:italic;font-size:12px;color:#6b7280;">Table 1 Project Summary</p>
-<table class="project-summary-table">
+<table class="project-summary-table">   <!-- ← added class here -->
   <thead>
     <tr>
-      <th colspan="3" style="text-align:center;">Description</th>
+      <th colspan="3">Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td style="text-align:center;">1</td><td>Village</td><td>Bahadur Khaskheli</td></tr>
-    <tr><td style="text-align:center;">2</td><td>Deh</td><td>Fateh Pur</td></tr>
-    <tr><td style="text-align:center;">3</td><td>Union Council</td><td>Shaikh Fareed</td></tr>
-    <tr><td style="text-align:center;">4</td><td>Taluka</td><td>Tando Muhammad Khan</td></tr>
-    <tr><td style="text-align:center;">5</td><td>District</td><td>Tando Muhammad Khan</td></tr>
-    <tr><td style="text-align:center;">6</td><td>No. of Households in the Village</td><td>57</td></tr>
-    <tr><td style="text-align:center;">8</td><td>SPHF Houses</td><td>25</td></tr>
-    <tr><td style="text-align:center;">9</td><td>Population</td><td>429</td></tr>
-    <tr><td style="text-align:center;">10</td><td>Financial Support</td><td>SPHF (GoS)</td></tr>
-    <tr><td style="text-align:center;">11</td><td>Project Implementation Lead</td><td>EA Consulting Pvt. Ltd</td></tr>
-    <tr><td style="text-align:center;">12</td><td>SPHF Implementing Partner (IP)</td><td>NRSP</td></tr>
+    <tr><td style="text-align:center;width:20px;">1</td><td>Village</td><td>Bahadur Khaskheli</td></tr>
+    <tr><td style="text-align:center;width:40px;">2</td><td>Deh</td><td>Fateh Pur</td></tr>
+    <tr><td style="text-align:center;width:40px;">3</td><td>Union Council</td><td>Shaikh Fareed</td></tr>
+    <tr><td style="text-align:center;width:40px;">4</td><td>Taluka</td><td>Tando Muhammad Khan</td></tr>
+    <tr><td style="text-align:center;width:40px;">5</td><td>District</td><td>Tando Muhammad Khan</td></tr>
+    <tr><td style="text-align:center;width:40px;">6</td><td>No. of Households in the Village</td><td>57</td></tr>
+    <tr><td style="text-align:center;width:40px;">8</td><td>SPHF Houses</td><td>25</td></tr>
+    <tr><td style="text-align:center;width:40px;">9</td><td>Population</td><td>429</td></tr>
+    <tr><td style="text-align:center;width:40px;">10</td><td>Financial Support</td><td>SPHF (GoS)</td></tr>
+    <tr><td style="text-align:center;width:40px;">11</td><td>Project Implementation Lead</td><td>EA Consulting Pvt. Ltd</td></tr>
+    <tr><td style="text-align:center;width:40px;">12</td><td>SPHF Implementing Partner (IP)</td><td>NRSP</td></tr>
   </tbody>
 </table>
 `;
+
 
 function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
   const isAnyLoading = fields.some((f) => fieldLoading[f.id]);

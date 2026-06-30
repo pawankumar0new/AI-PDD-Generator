@@ -165,6 +165,53 @@ function DropdownStyles() {
   return <style>{DROPDOWN_CSS}</style>;
 }
 
+// ── Normalize table structure on save ──────────────────────────────────────
+// TipTap's table extension outputs ALL rows (including the header row) inside
+// a single <tbody>, with no <thead>. Our read-mode CSS stripes rows using
+// `tbody tr:nth-child(odd/even)`, which assumes the header row is OUTSIDE the
+// tbody (as it is in the original default tables). When the header row ends
+// up as tbody's first <tr> instead, every row's odd/even parity shifts by
+// one — flipping the white/gray striping after every edit+save.
+//
+// This walks the saved HTML and moves any leading header rows (rows made of
+// <th> cells) out of <tbody> and into a proper <thead>, so striping stays
+// consistent whether the table came from the default HTML or the editor.
+function normalizeTableHtml(html) {
+  if (!html || typeof document === "undefined") return html;
+  try {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = html;
+
+    wrapper.querySelectorAll("table").forEach((table) => {
+      const tbody = table.querySelector(":scope > tbody");
+      if (!tbody) return;
+
+      const rows = Array.from(tbody.querySelectorAll(":scope > tr"));
+      if (rows.length === 0) return;
+
+      // Count leading rows that are header rows (made up of <th> cells).
+      let splitIndex = 0;
+      while (splitIndex < rows.length && rows[splitIndex].querySelector("th")) {
+        splitIndex++;
+      }
+      if (splitIndex === 0) return; // tbody already starts with a data row — nothing to fix
+
+      let thead = table.querySelector(":scope > thead");
+      if (!thead) {
+        thead = document.createElement("thead");
+        table.insertBefore(thead, tbody);
+      }
+      for (let i = 0; i < splitIndex; i++) {
+        thead.appendChild(rows[i]);
+      }
+    });
+
+    return wrapper.innerHTML;
+  } catch {
+    return html; // fail safe — never block a save over this
+  }
+}
+
 // Reusable dropdown menu item
 function DropdownItem({ onClick, active, disabled, icon, label }) {
   return (
@@ -590,7 +637,7 @@ export default function LLMFieldBlock({
   };
 
   const handleSave = () => {
-    onChange(draft);
+    onChange(normalizeTableHtml(draft));
     setEditing(false);
   };
 

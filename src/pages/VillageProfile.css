@@ -448,7 +448,7 @@
 }
 
 .tiptap-simple .ProseMirror th {
-  background: #1b87ec;
+  background: #4473C5;
   color: #ffffff;
   font-weight: 700;
   padding: 9px 14px;
@@ -503,7 +503,7 @@
   background: #e8f0fb;
   font-weight: 700;
   color: #1a3e74;
-  border-top: 2px solid #1b87ec;
+  border-top: 2px solid #4473C5;
 }
 
 .tiptap-simple .ProseMirror .selectedCell::after {
@@ -522,7 +522,7 @@
 }
 
 .field-read-content th {
-  background: #1b87ec;
+  background: #4473C5;
   color: #ffffff;
   font-weight: 700;
   padding: 9px 14px;
@@ -569,5 +569,5 @@
   background: #e8f0fb;
   font-weight: 700;
   color: #1a3e74;
-  border-top: 2px solid #1b87ec;
+  border-top: 2px solid #4473C5;
 }

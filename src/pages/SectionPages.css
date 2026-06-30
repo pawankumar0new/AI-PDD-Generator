@@ -304,13 +304,13 @@
 }
 
 .field-read-content th {
-  background: #1b87ec;
+  background: #4473C5;
   color: #ffffff;
   font-weight: 700;
   padding: 12px 18px;
   
   
-  text-align: center;
+  text-align: center !important;
   font-size: 12.5px;
   letter-spacing: 0.01em;
 }
@@ -327,8 +327,8 @@
 }
 .field-read-content td:last-child { border-right: none; }
 
-.field-read-content tr:nth-child(odd) td  { background: #ffffff; }
-.field-read-content tr:nth-child(even) td { background: #f0f4f8; }
+.field-read-content tbody tr:nth-child(odd) td { background: #ffffff; }
+.field-read-content tbody tr:nth-child(even) td { background: #f0f4f8; }
 
 /* ═══════════════════════════════════════
    INLINE FIELD EDITOR  (TipTap wrapper)
@@ -544,7 +544,7 @@
 /* ── TipTap table inside inline editor ── */
 .inline-field-editor .ProseMirror table {
   width: 100%;
-  table-layout: fixed !important;
+  table-layout:auto;
   border-collapse: collapse;
   font-size: 13px;
   margin: 14px 0;
@@ -552,8 +552,14 @@
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
+.inline-field-editor .ProseMirror td:first-child {
+  width: 50px;
+  min-width: 50px;
+  max-width: 50px;
+  text-align: center;
+}
 .inline-field-editor .ProseMirror th {
-  background: #1b87ec;
+  background: #4473C5;
   color: #fff;
   font-weight: 700;
   padding: 12px 18px;
@@ -571,8 +577,13 @@
   color: #1a1a2e;
 }
 .inline-field-editor .ProseMirror td:last-child { border-right: none; }
-.inline-field-editor .ProseMirror tr:nth-child(odd) td  { background: #fff; }
-.inline-field-editor .ProseMirror tr:nth-child(even) td { background: #f0f4f8; }
+/* Row striping inside the editor — the header row occupies tbody's first
+   slot here (TipTap doesn't split out a <thead>), which shifts data-row
+   parity by one compared to the pre-default tables. Swapped odd/even below
+   so the first data row still renders white and the second gray, matching
+   the default/read-mode tables. */
+.inline-field-editor .ProseMirror tr:nth-child(even) td { background: #fff; }
+.inline-field-editor .ProseMirror tr:nth-child(odd) td  { background: #f0f4f8; }
 
 /* ── Fixes for th > p — must cover BOTH the live editor and the saved read view ── */
 .inline-field-editor .ProseMirror th p,
@@ -635,7 +646,7 @@
 
 /* ── Header cells ── */
 .vps-th {
-  background: #1b87ec;
+  background: #4473C5;
   color: #ffffff;
   font-weight: 700;
   padding: 9px 14px;
@@ -746,23 +757,104 @@
   font-style: italic;
 }
 
-/* ── Project Summary table – bigger cells, single header ── */
+/* ── Project Summary table – narrow first column ── */
 .project-summary-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;           /* slightly larger text */
+  font-size: 14px;
 }
-
 .project-summary-table th,
 .project-summary-table td {
-  padding: 16px 22px !important;  /* bigger boxes */
-  border: 1px solid #e2e8f0;      /* keep borders for clarity */
+  padding: 14px 20px !important;   /* bigger boxes */
+  border: 1px solid #e2e8f0;
 }
-
 .project-summary-table th {
-  background: #1b87ec;
+  background: #4473C5;
   color: #ffffff;
   font-weight: 700;
-  text-align: center;        /* center the single header */
-  border: none;              /* remove border to make it a solid bar (optional) */
+  text-align: center !important;              /* ensures "Description" is centered */
+  border: none;
+}
+
+/* ── Override editor table styles for Section 6 (Village Profile) ── */
+.pdd-content-container .inline-field-editor .ProseMirror th {
+  padding: 14px 20px !important;      /* match read-mode */
+  font-size: 13px !important;         /* match read-mode */
+  text-align: left !important;        /* match read-mode */
+}
+
+.pdd-content-container .inline-field-editor .ProseMirror td {
+  padding: 14px 20px !important;      /* match read-mode */
+}
+
+.pdd-content-container .inline-field-editor .ProseMirror td:first-child {
+  width: 280px !important;
+  min-width: 280px !important;
+  text-align: left !important;        /* remove the centering */
+}
+
+/* Ensure the table structure itself stays consistent */
+.pdd-content-container .inline-field-editor .ProseMirror table {
+  border-collapse: collapse;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* ── Make read‑mode tables consistent, whether text is direct or wrapped in <p> ── */
+
+/* 1. First column: fixed width + left alignment (matches default table) */
+.field-read-content td:first-child,
+.pdd-content-container td:first-child {
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  text-align: left !important;
+  font-weight: 700;
+  color: #1a3e74;
+  border-right: 1px solid #e2e8f0;
+  white-space: normal;      /* allow wrapping if needed */
+}
+
+/* 2. Reset any <p> inside table cells to avoid extra spacing */
+.field-read-content td p,
+.pdd-content-container td p,
+.field-read-content th p,
+.pdd-content-container th p {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  text-align: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* 3. Ensure header cells are consistently styled */
+.field-read-content th,
+.pdd-content-container th {
+  padding: 14px 20px !important;   /* match default table padding */
+  font-size: 13px !important;
+  text-align: left !important;
+  background: #4473C5 !important;
+  color: #ffffff !important;
+}
+
+/* 4. Ensure all data cells have consistent padding */
+.field-read-content td,
+.pdd-content-container td {
+  padding: 14px 20px !important;
+  font-size: 13px !important;
+  vertical-align: top;
+  border-top: 1px solid #e2e8f0;
+}
+.pdd-content-container .project-summary-table th {
+  text-align: center !important;
+}
+.pdd-content-container .inline-field-editor .ProseMirror table.project-summary-table th {
+  text-align: center !important;
+}
+.pdd-content-container th[colspan="3"],
+.pdd-content-container th[colspan="3"] p {
+  text-align: center !important;
 }
