@@ -637,7 +637,10 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
         <Btn onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()} title="Undo"><Undo size={12} /></Btn>
         <Btn onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()} title="Redo"><Redo size={12} /></Btn>
       </div>
-      <EditorContent editor={editor} className="pdd-content" style={{ padding: "16px 24px", minHeight: 300 }} />
+      {/* No inline style here — padding/min-height live in pdd.css on
+          .pdd-content-container .pdd-content, so the editor and the
+          read-mode view (same class, same CSS) render identically. */}
+      <EditorContent editor={editor} className="pdd-content" />
     </div>
   );
 }

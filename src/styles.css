@@ -399,264 +399,7 @@ body {
   color: inherit;
 }
 
-/* ── PDD Content Container — unified scope for read view + TipTap editor ─── */
-/* ── PDD unified typography — read view + TipTap editor ─── */
-
-.pdd-content-container h1 {
-  font-size: 16px;
-  font-weight: 800;
-  color: #1d4ed8;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: normal;
-}
-
-.pdd-content-container,
-.pdd-content-container p,
-.pdd-content-container h1,
-.pdd-content-container h2,
-.pdd-content-container h3,
-.pdd-content-container h4 {
-  font-family: 'Inter', sans-serif;
-}
-
-.pdd-content-container h2 {
-  font-size: 16px;
-  font-weight: 800;
-  color: #0c0a09; /* stone-900 */
-  margin-top: 24px;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-
-.pdd-content-container h3 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1d4ed8; /* blue-700 */
-  margin: 0;
-  letter-spacing: 0.025em;
-  padding-left: 12px;
-}
-
-/* Both read-mode p and TipTap p share identical type style */
-.pdd-content-container p,
-.pdd-content-container .inline-field-editor .ProseMirror p {
-  font-size: 14px;
-  line-height: 1.85;
-  text-align: justify;
-  color: #44403c;
-  margin: 0 0 12px;
-  padding-left: 12px;
-}
-
-/* Both read-mode h4 and TipTap h4 share identical type style */
-.pdd-content-container h4,
-.pdd-content-container .inline-field-editor .ProseMirror h4 {
-  font-size: 14px;
-  font-weight: 700;
- 
-  color: #000000;
-  text-decoration: underline;
-  margin: 14px 0 4px;
-  padding-left: 12px;
-  text-transform: none;
-  letter-spacing: 0;
-  text-align: left;
-}
-/* ── Unified content styling ── */
-.pdd-content,
-.pdd-content .ProseMirror {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 1.85;
-  color: #44403c;
-}
-
-/* Paragraphs */
-.pdd-content p,
-.pdd-content .ProseMirror p {
-  font-size: 14px;
-  line-height: 1.85;
-  text-align: justify;
-  margin: 0 0 12px;
-  padding-left: 12px;
-  color: #44403c;
-}
-
-/* Headings (h1–h4) – match your document structure */
-.pdd-content h1,
-.pdd-content .ProseMirror h1 {
-  font-size: 16px;
-  font-weight: 800;
-  color: #1d4ed8;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin: 18px 0 8px;
-  border-bottom: 2px solid #1d4ed8;
-  padding-bottom: 4px;
-}
-.pdd-content h2,
-.pdd-content .ProseMirror h2 {
-  font-size: 16px;
-  font-weight: 800;
-  color: #0c0a09;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin: 24px 0 12px;
-}
-.pdd-content h3,
-.pdd-content .ProseMirror h3 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1d4ed8;
-  margin: 14px 0 6px;
-  padding-left: 12px;
-}
-.pdd-content h4,
-.pdd-content .ProseMirror h4 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #000000;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  margin: 14px 0 4px;
-  padding-left: 12px;
-  text-align: left; 
-}
-
-/* Lists */
-.pdd-content ul,
-.pdd-content .ProseMirror ul {
-  list-style-type: disc;
-  padding-left: 28px;
-  margin: 6px 0 12px;
-}
-.pdd-content ol,
-.pdd-content .ProseMirror ol {
-  list-style-type: decimal;
-  padding-left: 28px;
-  margin: 6px 0 12px;
-}
-.pdd-content li,
-.pdd-content .ProseMirror li {
-  font-size: 14px;
-  line-height: 1.8;
-  margin-bottom: 6px;
-  padding-left: 4px;
-}
-
-/* Tables – PDF‑report style */
-.pdd-content table,
-.pdd-content .ProseMirror table {
-  width: 100%;
-  table-layout: auto ;
-  border-collapse: collapse;
-  font-size: 13px;
-  margin: 14px 0;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
-.pdd-content td:first-child {
-  width: 50px;
-  min-width: 50px;
-  max-width: 50px;
-  text-align: center;
-}
-.pdd-content th,
-.pdd-content .ProseMirror th {
-  background: #4473C5;
-  color: #ffffff;
-  font-weight: 700;
-  padding: 9px 14px;
-  border: none;
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  text-align: left;
-  font-size: 12.5px;
-  letter-spacing: 0.01em;
-  min-height: 2.5rem; 
-}
-.pdd-content th:last-child,
-.pdd-content .ProseMirror th:last-child {
-  border-right: none;
-}
-.pdd-content td,
-.pdd-content .ProseMirror td {
-  padding: 8px 14px;
-  border: none;
-  border-top: 1px solid #e2e8f0;
-  border-right: 1px solid #e2e8f0;
-  vertical-align: top;
-  color: #1a1a2e;
-  min-height: 2.5rem; 
-}
-.pdd-content td:last-child,
-.pdd-content .ProseMirror td:last-child {
-  border-right: none;
-}
-/* Read-mode (no .ProseMirror present) — unchanged, matches default tables */
-.pdd-content tbody tr:nth-child(odd) td {
-  background: #ffffff;
-}
-.pdd-content tbody tr:nth-child(even) td {
-  background: #D9E1F3;
-}
-
-/* Editor only — header row occupies tbody's first slot here, so parity
-   is swapped relative to read-mode to keep the same visual result */
-.pdd-content .ProseMirror tbody tr:nth-child(even) td {
-  background: #ffffff;
-}
-.pdd-content .ProseMirror tbody tr:nth-child(odd) td {
-  background: #D9E1F3;
-}
-/* Images */
-.pdd-content img,
-.pdd-content .ProseMirror img {
-  max-width: 95%;
-  width: auto;
-  height: auto;
-  display: block;
-  margin: 16px auto;
-  border-radius: 4px;
-}
-
-/* Inline elements */
-.pdd-content strong,
-.pdd-content .ProseMirror strong {
-  font-weight: 700;
-  color: #1c1917;
-}
-.pdd-content em,
-.pdd-content .ProseMirror em {
-  font-style: italic;
-}
-.pdd-content col:first-child {
-  width: 50px;
-}
-/* Editor only — TipTap always injects its own <colgroup> with inline
-   min-width on every <col> (derived from the table's literal first row,
-   which here is a single colspan-5 title cell). That inline style beats a
-   normal class rule, so it must be overridden with !important here. */
-.pdd-content .ProseMirror col:first-child {
-  width: 50px !important;
-  min-width: 50px !important;
-  max-width: 50px !important;
-}
-.pdd-content td:first-child {
-  width: 50px;
-  min-width: 50px;
-  max-width: 50px;
-}
-.pdd-content .ProseMirror td:first-child {
-  width: 50px !important;
-  min-width: 50px !important;
-  max-width: 50px !important;
-  text-align: center;
-}
+/* ── PDD content styling has moved to pdd.css (see .pdd-content-container) ── */
 
 /* ───────────────────────────────────────────────────────────────────────────
    SECTION B — Section Pages styles (formerly SectionPages.css)
@@ -894,8 +637,7 @@ body {
 }
 
 /* ── Read-mode typography — mirrors TipTap output ── */
-.field-read-content p,
-.pdd-content-container p {
+.field-read-content p {
   font-size: 13.5px;
   line-height: 1.85;
   text-align: justify;
@@ -904,25 +646,21 @@ body {
   margin: 0 0 12px;
   padding-left: 12px;
 }
-.field-read-content ol,
-.pdd-content-container ol {
+.field-read-content ol {
   padding-left: 28px;
   margin: 6px 0 12px;
   list-style-type: decimal;
 }
 
-.field-read-content ul,
-.pdd-content-container ul {
+.field-read-content ul {
   padding-left: 28px;
   margin: 6px 0 12px;
 }
-.field-read-content p:last-child,
-.pdd-content-container p:last-child {
+.field-read-content p:last-child {
   margin-bottom: 0;
 }
 
-.field-read-content h4,
-.pdd-content-container h4 {
+.field-read-content h4 {
   font-family: 'Inter', sans-serif;
   font-size: 13.5px;
   font-weight: 700;
@@ -936,14 +674,7 @@ body {
   text-align: left;
 }
 
-.field-read-content ul,
-.pdd-content-container ul {
-  padding-left: 28px;
-  margin: 6px 0 12px;
-}
-
-.field-read-content li,
-.pdd-content-container li {
+.field-read-content li {
   font-size: 13.5px;
   font-family: 'Inter', sans-serif;
   color: #44403c;
@@ -951,8 +682,7 @@ body {
   margin-bottom: 6px;
 }
 
-.field-read-content strong,
-.pdd-content-container strong {
+.field-read-content strong {
   font-weight: 700;
   color: #1c1917;
 }
@@ -1201,8 +931,7 @@ body {
   font-style: oblique 14deg !important;
   color: inherit;
 }
-.field-read-content em,
-.pdd-content-container em {
+.field-read-content em {
   font-style: oblique 14deg !important;
 }
 
@@ -1252,9 +981,7 @@ body {
 
 /* ── Fixes for th > p — must cover BOTH the live editor and the saved read view ── */
 .inline-field-editor .ProseMirror th p,
-.inline-field-editor .ProseMirror th p *,
-.pdd-content th p,
-.pdd-content th p * {
+.inline-field-editor .ProseMirror th p * {
   color: #ffffff !important;
   margin: 0;
   padding-left: 10px;
@@ -1411,21 +1138,18 @@ body {
   margin: 16px auto;
   border-radius: 4px;
 }
-.field-read-content strong,
-.pdd-content-container strong {
+.field-read-content strong {
   font-weight: 700;
   color: #1c1917;
 }
 
-.field-read-content em,
-.pdd-content-container em {
+.field-read-content em {
   font-style: italic;
 }
 
 /* ── Project Summary table – narrow first column ── */
 /* ── Project Summary table — force narrow, centered number column ── */
 .project-summary-table td:first-child,
-.pdd-content-container .project-summary-table td:first-child,
 .field-read-content .project-summary-table td:first-child {
   width: 40px !important;
   min-width: 40px !important;
@@ -1440,7 +1164,6 @@ body {
 /* ── Cost Detail table — grand-total rows merge the first 4 columns; ── */
 /* ── override the narrow 40px first-column rule so they can span full width ── */
 .cost-detail-table td.cdt-span-cell,
-.pdd-content-container .cost-detail-table td.cdt-span-cell,
 .field-read-content .cost-detail-table td.cdt-span-cell {
   width: auto !important;
   min-width: 0 !important;
@@ -1448,36 +1171,10 @@ body {
   white-space: normal !important;
 }
 
-/* ── Override editor table styles for Section 6 (Village Profile) ── */
-.pdd-content-container .inline-field-editor .ProseMirror th {
-  padding: 14px 20px !important;      /* match read-mode */
-  font-size: 13px !important;         /* match read-mode */
-  text-align: left !important;        /* match read-mode */
-}
-
-.pdd-content-container .inline-field-editor .ProseMirror td {
-  padding: 14px 20px !important;      /* match read-mode */
-}
-
-.pdd-content-container .inline-field-editor .ProseMirror td:first-child {
-  width: 280px !important;
-  min-width: 280px !important;
-  text-align: left !important;        /* remove the centering */
-}
-
-/* Ensure the table structure itself stays consistent */
-.pdd-content-container .inline-field-editor .ProseMirror table {
-  border-collapse: collapse;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-}
-
 /* ── Make read‑mode tables consistent, whether text is direct or wrapped in <p> ── */
 
 /* 1. First column: fixed width + left alignment (matches default table) */
-.field-read-content td:first-child,
-.pdd-content-container td:first-child {
+.field-read-content td:first-child {
   width: 280px !important;
   min-width: 280px !important;
   max-width: 280px !important;
@@ -1490,9 +1187,7 @@ body {
 
 /* 2. Reset any <p> inside table cells to avoid extra spacing */
 .field-read-content td p,
-.pdd-content-container td p,
-.field-read-content th p,
-.pdd-content-container th p {
+.field-read-content th p {
   margin: 0 !important;
   padding: 0 !important;
   font-size: inherit !important;
@@ -1503,8 +1198,7 @@ body {
 }
 
 /* 3. Ensure header cells are consistently styled */
-.field-read-content th,
-.pdd-content-container th {
+.field-read-content th {
   padding: 14px 20px !important;   /* match default table padding */
   font-size: 13px !important;
   text-align: left !important;
@@ -1513,20 +1207,9 @@ body {
 }
 
 /* 4. Ensure all data cells have consistent padding */
-.field-read-content td,
-.pdd-content-container td {
+.field-read-content td {
   padding: 14px 20px !important;
   font-size: 13px !important;
   vertical-align: top;
   border-top: 1px solid #e2e8f0;
-}
-.pdd-content-container .project-summary-table th {
-  text-align: center !important;
-}
-.pdd-content-container .inline-field-editor .ProseMirror table.project-summary-table th {
-  text-align: center !important;
-}
-.pdd-content-container th[colspan="3"],
-.pdd-content-container th[colspan="3"] p {
-  text-align: center !important;
 }

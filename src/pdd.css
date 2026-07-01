@@ -1,0 +1,333 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   pdd.css — PDD (Project Design Document) content styling
+   ─────────────────────────────────────────────────────────────────────────
+   SINGLE PARENT RULE: every selector in this file is scoped through
+   .pdd-content-container. Nothing here is ever written as a bare,
+   unscoped class — if it needs styling, it is reached by nesting under
+   .pdd-content-container.
+
+   Structure inside .pdd-content-container:
+     .pdd-content-container
+       ├─ h1 / h3 / h4               → page-level headings (section title,
+       │                                field labels) that sit OUTSIDE the
+       │                                generated content area
+       └─ .pdd-content                → the generated / editable content
+            (LLMFieldBlock renders BOTH the TipTap editor
+             <EditorContent className="pdd-content"> and the static
+             read-mode <div className="pdd-content" dangerouslySetInnerHTML>
+             with this exact same class, so every rule below styles both
+             automatically and they stay pixel-identical in and out of
+             edit mode)
+            ├─ p / h1-h4 / ul / ol / li / strong / em
+            ├─ table / th / td (+ project-summary-table / cost-detail-table
+            │   variants)
+            └─ img
+
+   NOTE ON EDITOR-ONLY OVERRIDES: TipTap wraps the editable content in an
+   internal ".ProseMirror" node. Because that node is just another
+   descendant of .pdd-content, plain descendant selectors like
+   ".pdd-content-container .pdd-content p" already reach text inside it —
+   there is no need to duplicate every rule with a ".ProseMirror" variant.
+   The only ".ProseMirror"-specific rules below are for genuine structural
+   differences between the live editor and the saved HTML (TipTap keeps
+   the header row inside <tbody> instead of splitting out a <thead>, and
+   injects its own inline <colgroup> widths) — without these two fixes the
+   table striping and column widths would visually shift between editing
+   and reading the same content.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.pdd-content-container,
+.pdd-content-container .pdd-content {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Page-level headings ──────────────────────────────────────────────────
+   Headings that sit directly under .pdd-content-container but OUTSIDE the
+   generated .pdd-content area — the section title ("2. Cost Detail") and
+   the LLMFieldBlock field labels ("5.1 Admin Location", etc). Field labels
+   set most of their own type styling inline in JSX; padding-left is the
+   one property they rely on from here. */
+.pdd-content-container h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.pdd-content-container h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin: 0;
+  letter-spacing: 0.025em;
+  padding-left: 12px;
+}
+
+.pdd-content-container h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 14px 0 4px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   GENERATED CONTENT — .pdd-content-container .pdd-content
+   Shared by the TipTap editor and the static read-mode view.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.pdd-content-container .pdd-content {
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #44403c;
+  /* Matches read-mode and edit-mode padding/min-height so the content
+     block is the exact same size and shape whether you're reading it or
+     editing it — no layout jump when toggling in/out of TipTap. */
+  padding: 16px 24px;
+  min-height: 300px;
+}
+
+/* ── Paragraphs ───────────────────────────────────────────────────────────── */
+.pdd-content-container .pdd-content p {
+  font-size: 13.5px;
+  line-height: 1.85;
+  text-align: justify;
+  color: #44403c;
+  margin: 0 0 12px;
+  padding-left: 12px;
+}
+.pdd-content-container .pdd-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Headings within generated content ───────────────────────────────────── */
+.pdd-content-container .pdd-content h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 18px 0 8px;
+  border-bottom: 2px solid #1d4ed8;
+  padding-bottom: 4px;
+}
+.pdd-content-container .pdd-content h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0c0a09;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 24px 0 12px;
+}
+.pdd-content-container .pdd-content h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin: 14px 0 6px;
+  padding-left: 12px;
+}
+.pdd-content-container .pdd-content h4 {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1a3e74;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 16px 0 6px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+/* ── Lists ────────────────────────────────────────────────────────────────── */
+.pdd-content-container .pdd-content ul {
+  list-style-type: disc;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.pdd-content-container .pdd-content ol {
+  list-style-type: decimal;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.pdd-content-container .pdd-content li {
+  font-size: 13.5px;
+  color: #44403c;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+.pdd-content-container .pdd-content li p {
+  margin: 0;
+}
+
+/* ── Inline emphasis ──────────────────────────────────────────────────────── */
+.pdd-content-container .pdd-content strong {
+  font-weight: 700;
+  color: #1c1917;
+}
+.pdd-content-container .pdd-content em {
+  font-style: oblique 14deg;
+  color: inherit;
+}
+
+/* ── Tables — PDF-report style ────────────────────────────────────────────── */
+.pdd-content-container .pdd-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.pdd-content-container .pdd-content th {
+  background: #4473C5;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 14px 20px;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+.pdd-content-container .pdd-content th:last-child {
+  border-right: none;
+}
+.pdd-content-container .pdd-content th p,
+.pdd-content-container .pdd-content th p * {
+  color: #ffffff;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.pdd-content-container .pdd-content td {
+  padding: 14px 20px;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+  color: #1a1a2e;
+  font-size: 13px;
+}
+.pdd-content-container .pdd-content td:last-child {
+  border-right: none;
+}
+
+/* Reset <p> spacing when it's used inside a table cell */
+.pdd-content-container .pdd-content td p,
+.pdd-content-container .pdd-content th p {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  color: inherit;
+  font-weight: inherit;
+}
+
+/* Default first column — attribute/label style (e.g. two-column detail
+   tables). Narrower "S.No"-style tables opt out via .project-summary-table
+   below. */
+.pdd-content-container .pdd-content td:first-child {
+  width: 280px;
+  min-width: 280px;
+  max-width: 280px;
+  text-align: left;
+  font-weight: 700;
+  color: #1a3e74;
+  border-right: 1px solid #e2e8f0;
+  white-space: normal;
+}
+
+/* Read-mode row striping */
+.pdd-content-container .pdd-content tbody tr:nth-child(odd) td {
+  background: #ffffff;
+}
+.pdd-content-container .pdd-content tbody tr:nth-child(even) td {
+  background: #D9E1F3;
+}
+
+/* Editor-only structural fix: TipTap keeps the header row as tbody's
+   first <tr> instead of splitting it into a <thead>, which shifts every
+   data row's nth-child parity by one. Swapped here so the live editor's
+   stripes match the saved read-mode result exactly. */
+.pdd-content-container .pdd-content .ProseMirror tbody tr:nth-child(even) td {
+  background: #ffffff;
+}
+.pdd-content-container .pdd-content .ProseMirror tbody tr:nth-child(odd) td {
+  background: #D9E1F3;
+}
+
+/* Editor-only structural fix: TipTap injects its own <colgroup> with an
+   inline min-width on every <col>, which otherwise beats the width rules
+   above once the table is being edited. */
+.pdd-content-container .pdd-content .ProseMirror col:first-child {
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+}
+.pdd-content-container .pdd-content .ProseMirror td:first-child {
+  width: 280px !important;
+  min-width: 280px !important;
+  text-align: left !important;
+}
+
+/* ── Table variant: project-summary-table / cost-detail-table ───────────────
+   Narrow, centered "S.No" first column instead of the wide attribute
+   label column above. */
+.pdd-content-container .pdd-content .project-summary-table td:first-child {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  text-align: center !important;
+  padding: 14px 8px !important;
+  font-weight: 700;
+  color: #1a3e74;
+  white-space: nowrap;
+}
+.pdd-content-container .pdd-content .project-summary-table th {
+  text-align: center !important;
+}
+.pdd-content-container .pdd-content .ProseMirror .project-summary-table col:first-child {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+}
+.pdd-content-container .pdd-content .ProseMirror .project-summary-table td:first-child {
+  width: 40px !important;
+  min-width: 40px !important;
+  text-align: center !important;
+}
+
+/* Cost Detail grand-total rows merge the first 4 columns, so the narrow
+   40px first-column rule above must not apply to them */
+.pdd-content-container .pdd-content .cost-detail-table td.cdt-span-cell {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  white-space: normal !important;
+}
+
+.pdd-content-container .pdd-content th[colspan="3"],
+.pdd-content-container .pdd-content th[colspan="3"] p {
+  text-align: center !important;
+}
+
+/* ── Images ───────────────────────────────────────────────────────────────── */
+.pdd-content-container .pdd-content img {
+  max-width: 95%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 16px auto;
+  border-radius: 4px;
+}
