@@ -39,6 +39,8 @@
 .pdd-content-container,
 .pdd-content-container .pdd-content {
   font-family: 'Inter', sans-serif;
+  padding: 12px 20px !important;    /* was 16px 24px */
+  min-height: 200px !important;  
 }
 
 /* ── Page-level headings ──────────────────────────────────────────────────

@@ -33,12 +33,46 @@ const API_URL = "http://192.168.110.87:8000/api/v1/village/analyze";
 
 function plainTextToHtml(text) {
   if (!text || typeof text !== "string") return "";
-  return text
-    .split(/\n\s*\n/)           // split on blank lines
-    .map((chunk) => chunk.trim().replace(/\n/g, " ")) // collapse internal newlines
-    .filter(Boolean)
-    .map((chunk) => `<p>${chunk}</p>`)
-    .join("");
+
+  const lines = text.split('\n');
+
+  // Detect a numbered heading (e.g., "8.1 Existing Water Supply System")
+  function isHeadingLine(line) {
+    const trimmed = line.trim();
+    if (!trimmed) return false;
+    const headingRegex = /^\d+(\.\d+)*\s+[A-Za-z\s]+$/;
+    const hasPunctuation = /[.,;:?!()]/.test(trimmed);
+    return headingRegex.test(trimmed) && !hasPunctuation && trimmed.length <= 60;
+  }
+
+  // 1. Filter out heading lines
+  const filteredLines = lines.filter(line => !isHeadingLine(line));
+
+  // 2. Group non‑empty lines into paragraphs; blank lines act as separators
+  const paragraphs = [];
+  let current = [];
+
+  for (const line of filteredLines) {
+    const trimmed = line.trim();
+    if (trimmed === '') {
+      // Blank line – close current paragraph if it has content
+      if (current.length > 0) {
+        paragraphs.push(current.join(' '));
+        current = [];
+      }
+    } else {
+      current.push(trimmed);
+    }
+  }
+  if (current.length > 0) {
+    paragraphs.push(current.join(' '));
+  }
+
+  // 3. Convert each paragraph to <p>
+  return paragraphs
+    .filter(p => p.length > 0)
+    .map(p => `<p>${p}</p>`)
+    .join('');
 }
 
 export function useLLMGenerate() {

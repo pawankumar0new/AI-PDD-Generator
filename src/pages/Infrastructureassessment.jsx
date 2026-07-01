@@ -16,7 +16,7 @@ import {
   INFRA_SOLIDWASTE_FIELD_DEFS,
   FIELD_API_PAYLOAD,
 } from "../data/pddStructure";
-import "./SectionPages.css";
+
 
 // ── "Generate All" button for the entire section ──────────────────────────
 function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
