@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { Sparkles } from "lucide-react";
 import LLMFieldBlock from "../components/LLMFieldBlock";
 import { PROJECT_SUMMARY_FIELD_DEFS, FIELD_API_PAYLOAD } from "../data/pddStructure";
-import "./SectionPages.css";
+
 
 // Add this constant at the top of the file, after imports:
 

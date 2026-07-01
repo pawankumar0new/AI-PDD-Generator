@@ -18,21 +18,6 @@ const SECTION5_FIELDS = [
     label:         "",
     sectionNumber: "",
   },
-  {
-    id:            "admin_location",
-    label:         "Administrative Location & Access Map",
-    sectionNumber: "1.1.1",
-  },
-  {
-    id:            "settlement_pattern",
-    label:         "Settlement Pattern & Land Tenure",
-    sectionNumber: "1.1.2",
-  },
-  {
-    id:            "migration_history",
-    label:         "Migration / History of Settlement",
-    sectionNumber: "1.1.3",
-  },
 ];
 
 // ── "Generate All" button (same as Sections 8, 9, 10) ──────────────────────
@@ -80,7 +65,7 @@ function SectionGenerateBtn({ fields, fieldLoading, onGenerate, label }) {
         ) : (
           <>
             <Sparkles size={11} strokeWidth={1.75} />
-            Generate All — Section 5
+            Generate Section 5
           </>
         )}
         <style>{`@keyframes sec5-spin { to { transform: rotate(360deg); } }`}</style>

@@ -183,15 +183,39 @@ function normalizeTableHtml(html) {
     wrapper.innerHTML = html;
 
     wrapper.querySelectorAll("table").forEach((table) => {
+      // TipTap always injects its own <colgroup><col style="min-width:...">
+      // on save, with widths evenly derived from the table's literal first
+      // row (often a single colspan'd title cell). That baked-in inline
+      // width beats our CSS column-width rules once the table leaves the
+      // editor, causing columns like "S.No" to balloon. Column widths here
+      // are fully controlled by CSS classes, so the injected colgroup is
+      // safe to drop entirely.
+      table.querySelectorAll(":scope > colgroup").forEach((cg) => cg.remove());
+
       const tbody = table.querySelector(":scope > tbody");
       if (!tbody) return;
 
       const rows = Array.from(tbody.querySelectorAll(":scope > tr"));
       if (rows.length === 0) return;
 
-      // Count leading rows that are header rows (made up of <th> cells).
+      // A row counts as a "header row" if it has real <th> cells, OR if
+      // every cell in the row is bold (font-weight 700/bold) — some of our
+      // default tables build repeating column-header rows (e.g. the
+      // "S.No | Description | ..." row) out of styled <td> cells instead
+      // of <th>, purely for visual reasons. Those still function as
+      // headers and must be grouped into <thead> the same way, otherwise
+      // they're left behind in <tbody> and shift every subsequent row's
+      // nth-child parity by one, inverting the odd/even striping.
+      const isHeaderRow = (row) => {
+        if (row.querySelector("th")) return true;
+        const cells = Array.from(row.children);
+        if (cells.length === 0) return false;
+        return cells.every((cell) => /font-weight\s*:\s*(700|bold)\b/i.test(cell.getAttribute("style") || ""));
+      };
+
+      // Count leading rows that are header rows.
       let splitIndex = 0;
-      while (splitIndex < rows.length && rows[splitIndex].querySelector("th")) {
+      while (splitIndex < rows.length && isHeaderRow(rows[splitIndex])) {
         splitIndex++;
       }
       if (splitIndex === 0) return; // tbody already starts with a data row — nothing to fix
@@ -269,6 +293,42 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
       return ["em", { ...HTMLAttributes, style: "font-style: italic" }, 0];
     },
   });
+
+  // ── Table nodes: preserve inline `style` AND `class` attributes ─────────
+  // TipTap's table nodes only whitelist a fixed set of attributes
+  // (colspan/rowspan/colwidth). Any other attribute — inline `style`
+  // (e.g. text-align:center on section-title <th>s, background:#... on
+  // total/section <tr>s) *and* the `class` attribute itself (e.g. the
+  // <table class="project-summary-table cost-detail-table"> that our CSS
+  // keys off of, or a <td class="cdt-span-cell"> on grand-total rows) —
+  // gets silently dropped the moment the HTML is parsed into the editor.
+  // These extended nodes round-trip both so nothing is lost on
+  // edit → save → re-render.
+  const withStyleAndClassAttrs = (attrs) => ({
+    ...attrs,
+    style: {
+      default: null,
+      parseHTML: (el) => el.getAttribute("style"),
+      renderHTML: (a) => (a.style ? { style: a.style } : {}),
+    },
+    class: {
+      default: null,
+      parseHTML: (el) => el.getAttribute("class"),
+      renderHTML: (a) => (a.class ? { class: a.class } : {}),
+    },
+  });
+  const TableWithClass = Table.extend({
+    addAttributes() { return withStyleAndClassAttrs(this.parent?.() || {}); },
+  });
+  const TableRowWithStyle = TableRow.extend({
+    addAttributes() { return withStyleAndClassAttrs(this.parent?.() || {}); },
+  });
+  const TableHeaderWithStyle = TableHeader.extend({
+    addAttributes() { return withStyleAndClassAttrs(this.parent?.() || {}); },
+  });
+  const TableCellWithStyle = TableCell.extend({
+    addAttributes() { return withStyleAndClassAttrs(this.parent?.() || {}); },
+  });
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3, 4] }, gapcursor: false }),
@@ -284,10 +344,10 @@ function InlineEditor({ value, onChange, onSave, onCancel }) {
       Superscript,
       TaskList,
       TaskItem.configure({ nested: true }),
-      Table.configure({ resizable: false }),
-      TableRow,
-      TableHeader,
-      TableCell,
+      TableWithClass.configure({ resizable: false }),
+      TableRowWithStyle,
+      TableHeaderWithStyle,
+      TableCellWithStyle,
     ],
     content: value || "",
     onUpdate({ editor }) {

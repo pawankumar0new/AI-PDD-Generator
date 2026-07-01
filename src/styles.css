@@ -1,0 +1,1532 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   styles.css — UNIFIED PROJECT STYLESHEET
+   Merged from: App.css + SectionPages.css
+   Import this ONE file in App.jsx (or your root component) only.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────────────────────
+   SECTION A — Global / App-level styles (formerly App.css)
+   ─────────────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+/* ── SPVO Design System Variables ─────────────────────────────────────────── */
+:root {
+  --primary:        #00529d;
+  --primary-hover:  #003f7a;
+  --primary-dark:   #1a3e74;
+  --font-sans:      'Nunito', sans-serif;
+  --font-mono:      'IBM Plex Mono', monospace;
+
+  --bg:             #f4f6f9;
+  --surface:        #ffffff;
+  --border:         #dee2e6;
+  --border-strong:  #adb5bd;
+  --text-primary:   #1a1a2e;
+  --text-secondary: #495057;
+  --text-muted:     #868e96;
+  --shadow:         rgba(0,0,0,0.06);
+  --radius-lg:      0.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+}
+
+/* ── SPVO btn system ──────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, opacity 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  box-shadow: 0 2px 8px rgba(0, 82, 157, 0.3);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--text-secondary);
+  border-color: var(--border-strong);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: #f8f9fa;
+  border-color: #868e96;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+/* ── SPVO intro-y box ─────────────────────────────────────────────────────── */
+.intro-y {
+  animation: fadeSlideIn 0.25s ease both;
+}
+
+.box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+.app { min-height: 100vh; }
+
+.main-content {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 84px 28px 60px;
+}
+
+/* Page Hero */
+.page-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid var(--border);
+}
+.hero-left { flex: 1; }
+.hero-title {
+  display: flex;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--primary-dark);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.hero-desc {
+  display: flex;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Village Selector */
+.select-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 460px;
+}
+
+.village-select {
+  width: 100%;
+  appearance: none;
+  padding: 8px 36px 8px 12px;
+  background: #fff;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.village-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 82, 157, 0.15);
+}
+
+.select-chevron {
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Empty State */
+.empty-state { margin-top: 12px; }
+
+.empty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  opacity: 0.45;
+}
+
+.empty-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  animation: fadeSlideIn 0.4s ease both;
+}
+
+.empty-card-bar {
+  height: 10px;
+  background: linear-gradient(90deg, var(--border) 25%, #e9ecef 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+.empty-card-bar.short  { width: 60%; }
+.empty-card-bar.medium { width: 80%; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.empty-text {
+  text-align: flex-start;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.content-area { animation: fadeSlideIn 0.3s ease; }
+
+/* ── TipTap editor ────────────────────────────────────────────────────────── */
+.tiptap-simple .ProseMirror {
+  min-height: 520px;
+  padding: 20px 24px;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.8;
+  text-align: left;
+  color: #212529;
+}
+
+.tiptap-simple .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #adb5bd;
+  font-style: italic;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.tiptap-simple .ProseMirror strong { font-weight: 700; }
+.tiptap-simple .ProseMirror em     { font-style: italic; color: #6c757d; }
+
+.tiptap-simple .ProseMirror ul  { list-style-type: disc; padding-left: 56px; margin: 6px 0 10px; }
+.tiptap-simple .ProseMirror ol  { list-style-type: decimal; padding-left: 56px; margin: 6px 0 10px; }
+.tiptap-simple .ProseMirror li  { padding-left: 4px; margin: 4px 0; }
+.tiptap-simple .ProseMirror hr  { border: none; border-top: 2px solid #dee2e6; margin: 16px 0; }
+
+/* Task list */
+.tiptap-simple .ProseMirror ul[data-type="taskList"] { list-style: none; padding-left: 4px; }
+.tiptap-simple .ProseMirror ul[data-type="taskList"] li { display: flex; align-items: flex-start; gap: 8px; }
+.tiptap-simple .ProseMirror ul[data-type="taskList"] li > label { margin-top: 2px; flex-shrink: 0; }
+.tiptap-simple .ProseMirror ul[data-type="taskList"] li > label input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--primary); cursor: pointer; }
+
+/* Blockquote */
+.tiptap-simple .ProseMirror blockquote {
+  border-left: 3px solid var(--primary);
+  margin: 10px 0;
+  padding: 6px 16px;
+  background: #e8f0fb;
+  border-radius: 0 4px 4px 0;
+  color: var(--primary-dark);
+  font-style: italic;
+}
+
+/* Code block */
+.tiptap-simple .ProseMirror pre {
+  background: #1a3e74;
+  color: #e8f0fb;
+  border-radius: 6px;
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 10px 0;
+  overflow-x: auto;
+}
+.tiptap-simple .ProseMirror code {
+  background: #e8f0fb;
+  color: var(--primary-dark);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.tiptap-simple .ProseMirror pre code { background: none; color: inherit; padding: 0; }
+
+/* Images */
+/* ── Image size constraint ── */
+.tiptap-simple .ProseMirror img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 12px auto;
+  display: block;
+}
+
+/* Links */
+.tiptap-simple .ProseMirror a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.tiptap-simple .ProseMirror a:hover { color: var(--primary-dark); }
+
+/* Highlight */
+.tiptap-simple .ProseMirror mark { border-radius: 2px; padding: 0 2px; }
+
+/* Text alignment */
+.tiptap-simple .ProseMirror [style*="text-align: center"]  { text-align: center; }
+.tiptap-simple .ProseMirror [style*="text-align: right"]   { text-align: right; }
+.tiptap-simple .ProseMirror [style*="text-align: justify"] { text-align: justify; }
+
+/* Headings — SPVO structured document style */
+.tiptap-simple .ProseMirror h1 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 18px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-left: 0;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 4px;
+}
+.tiptap-simple .ProseMirror h2 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 14px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding-left: 16px;
+}
+.tiptap-simple .ProseMirror h3 {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 10px 0 5px;
+  padding-left: 0px;
+  text-transform: none;
+}
+.tiptap-simple .ProseMirror h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 8px 0 4px;
+  padding-left: 32px;
+}
+.tiptap-simple .ProseMirror p {
+  font-size: 13.5px;
+  text-align: justify;
+  font-family: 'Inter', sans-serif;
+  margin: 0 0 8px;
+  padding-left: 12px;
+  color: rgb(68 64 60 / var(--tw-text-opacity, 1));
+}
+
+/* Inline field editor */
+.inline-field-editor .ProseMirror {
+  min-height: 100px;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #212529;
+}
+/* .inline-field-editor .ProseMirror p {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #44403c;
+  margin: 0 0 12px;
+  padding-left: 12px;
+  text-align: justify;
+}
+
+.inline-field-editor .ProseMirror h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: underline;
+  margin: 14px 0 4px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+} */
+.inline-field-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #ced4da;
+  font-style: italic;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+.inline-field-editor .ProseMirror strong { font-weight: 700; }
+.inline-field-editor .ProseMirror em {
+  font-style: italic !important;
+  color: inherit;
+}
+
+/* ── PDD Content Container — unified scope for read view + TipTap editor ─── */
+/* ── PDD unified typography — read view + TipTap editor ─── */
+
+.pdd-content-container h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: normal;
+}
+
+.pdd-content-container,
+.pdd-content-container p,
+.pdd-content-container h1,
+.pdd-content-container h2,
+.pdd-content-container h3,
+.pdd-content-container h4 {
+  font-family: 'Inter', sans-serif;
+}
+
+.pdd-content-container h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0c0a09; /* stone-900 */
+  margin-top: 24px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+
+.pdd-content-container h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1d4ed8; /* blue-700 */
+  margin: 0;
+  letter-spacing: 0.025em;
+  padding-left: 12px;
+}
+
+/* Both read-mode p and TipTap p share identical type style */
+.pdd-content-container p,
+.pdd-content-container .inline-field-editor .ProseMirror p {
+  font-size: 14px;
+  line-height: 1.85;
+  text-align: justify;
+  color: #44403c;
+  margin: 0 0 12px;
+  padding-left: 12px;
+}
+
+/* Both read-mode h4 and TipTap h4 share identical type style */
+.pdd-content-container h4,
+.pdd-content-container .inline-field-editor .ProseMirror h4 {
+  font-size: 14px;
+  font-weight: 700;
+ 
+  color: #000000;
+  text-decoration: underline;
+  margin: 14px 0 4px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  text-align: left;
+}
+/* ── Unified content styling ── */
+.pdd-content,
+.pdd-content .ProseMirror {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #44403c;
+}
+
+/* Paragraphs */
+.pdd-content p,
+.pdd-content .ProseMirror p {
+  font-size: 14px;
+  line-height: 1.85;
+  text-align: justify;
+  margin: 0 0 12px;
+  padding-left: 12px;
+  color: #44403c;
+}
+
+/* Headings (h1–h4) – match your document structure */
+.pdd-content h1,
+.pdd-content .ProseMirror h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 18px 0 8px;
+  border-bottom: 2px solid #1d4ed8;
+  padding-bottom: 4px;
+}
+.pdd-content h2,
+.pdd-content .ProseMirror h2 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0c0a09;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 24px 0 12px;
+}
+.pdd-content h3,
+.pdd-content .ProseMirror h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin: 14px 0 6px;
+  padding-left: 12px;
+}
+.pdd-content h4,
+.pdd-content .ProseMirror h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 14px 0 4px;
+  padding-left: 12px;
+  text-align: left; 
+}
+
+/* Lists */
+.pdd-content ul,
+.pdd-content .ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.pdd-content ol,
+.pdd-content .ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.pdd-content li,
+.pdd-content .ProseMirror li {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+/* Tables – PDF‑report style */
+.pdd-content table,
+.pdd-content .ProseMirror table {
+  width: 100%;
+  table-layout: auto ;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.pdd-content td:first-child {
+  width: 50px;
+  min-width: 50px;
+  max-width: 50px;
+  text-align: center;
+}
+.pdd-content th,
+.pdd-content .ProseMirror th {
+  background: #4473C5;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 14px;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+  min-height: 2.5rem; 
+}
+.pdd-content th:last-child,
+.pdd-content .ProseMirror th:last-child {
+  border-right: none;
+}
+.pdd-content td,
+.pdd-content .ProseMirror td {
+  padding: 8px 14px;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+  color: #1a1a2e;
+  min-height: 2.5rem; 
+}
+.pdd-content td:last-child,
+.pdd-content .ProseMirror td:last-child {
+  border-right: none;
+}
+/* Read-mode (no .ProseMirror present) — unchanged, matches default tables */
+.pdd-content tbody tr:nth-child(odd) td {
+  background: #ffffff;
+}
+.pdd-content tbody tr:nth-child(even) td {
+  background: #D9E1F3;
+}
+
+/* Editor only — header row occupies tbody's first slot here, so parity
+   is swapped relative to read-mode to keep the same visual result */
+.pdd-content .ProseMirror tbody tr:nth-child(even) td {
+  background: #ffffff;
+}
+.pdd-content .ProseMirror tbody tr:nth-child(odd) td {
+  background: #D9E1F3;
+}
+/* Images */
+.pdd-content img,
+.pdd-content .ProseMirror img {
+  max-width: 95%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 16px auto;
+  border-radius: 4px;
+}
+
+/* Inline elements */
+.pdd-content strong,
+.pdd-content .ProseMirror strong {
+  font-weight: 700;
+  color: #1c1917;
+}
+.pdd-content em,
+.pdd-content .ProseMirror em {
+  font-style: italic;
+}
+.pdd-content col:first-child {
+  width: 50px;
+}
+/* Editor only — TipTap always injects its own <colgroup> with inline
+   min-width on every <col> (derived from the table's literal first row,
+   which here is a single colspan-5 title cell). That inline style beats a
+   normal class rule, so it must be overridden with !important here. */
+.pdd-content .ProseMirror col:first-child {
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+}
+.pdd-content td:first-child {
+  width: 50px;
+  min-width: 50px;
+  max-width: 50px;
+}
+.pdd-content .ProseMirror td:first-child {
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+  text-align: center;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   SECTION B — Section Pages styles (formerly SectionPages.css)
+   Shared styles for VillageBackground, VillageProfileSection,
+   SocialEnvironmental, ProjectSummary, etc.
+   ─────────────────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   SectionPages.css
+   Shared styles for VillageBackground, VillageProfileSection,
+   and SocialEnvironmental — all based on VillageProfile.css patterns.
+   Import this once in each of the three page components.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Page entrance animation ─────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.village-profile-root {
+  animation: fadeInUp 0.25s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   HEADER CARD
+   ═══════════════════════════════════════ */
+.vp-header-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(231, 229, 228, 0.8);
+  box-shadow: 0 1px 3px rgba(28, 25, 23, 0.05);
+}
+
+.vp-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── Icon box ── */
+.vp-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.28);
+}
+
+/* ── Title & subtitle ── */
+.vp-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #1c1917;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.vp-subtitle {
+  font-size: 12.5px;
+  color: #78716c;
+  margin: 0;
+}
+
+.vp-subtitle-village {
+  font-weight: 700;
+  color: #44403c;
+  background: #f5f5f4;
+  padding: 2px 7px;
+  border-radius: 8px;
+}
+
+/* ═══════════════════════════════════════
+   DOCUMENT CARD
+   ═══════════════════════════════════════ */
+.vp-document-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(231, 229, 228, 0.8);
+  box-shadow: 0 1px 4px rgba(28, 25, 23, 0.06);
+  overflow: hidden;
+}
+
+/* ── Top strip ── */
+.vp-doc-strip {
+  padding: 14px 32px;
+  background: linear-gradient(to right, #fafaf9, #ffffff);
+  border-bottom: 1px solid #f0f0ef;
+}
+
+.vp-doc-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vp-doc-sec-badge {
+  font-size: 10px;
+  font-weight: 900;
+  padding: 4px 9px;
+  border-radius: 8px;
+  font-family: monospace;
+  background: linear-gradient(135deg, #eff6ff, #eef2ff);
+  color: #1d4ed8;
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  letter-spacing: 0.03em;
+}
+
+.vp-doc-sec-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #78716c;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+/* ── Body padding ── */
+.vp-doc-body {
+  padding: 32px;
+}
+
+/* ═══════════════════════════════════════
+   FIELD BLOCK  (editable content unit)
+   ═══════════════════════════════════════ */
+.field-block-vp {
+  margin-bottom: 32px;
+  font-family: 'Inter', sans-serif;
+}
+
+.field-block-vp:last-child {
+  margin-bottom: 8px;
+}
+
+/* ── Heading row ── */
+.field-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 12px;
+}
+
+.field-heading-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin: 0;
+  letter-spacing: 0.015em;
+}
+
+.field-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Action buttons ── */
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #3b82f6, #1e40af);
+  font-family: inherit;
+  transition: opacity 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-edit:hover { opacity: 0.88; box-shadow: 0 2px 8px rgba(59,130,246,0.3); }
+
+.btn-cancel-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #6b7280, #374151);
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+.btn-cancel-edit:hover { opacity: 0.88; }
+
+.btn-save-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(to right, #22c55e, #15803d);
+  font-family: inherit;
+  transition: opacity 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-save-edit:hover { opacity: 0.88; box-shadow: 0 2px 8px rgba(34,197,94,0.3); }
+
+/* ── Read-mode content ── */
+.field-read-content {
+  transition: opacity 0.2s ease;
+}
+
+.field-read-content--empty {
+  opacity: 0.4;
+}
+
+.field-read-empty-hint {
+  font-size: 13px;
+  font-style: italic;
+  color: #a8a29e;
+  line-height: 1.6;
+}
+
+/* ── Read-mode typography — mirrors TipTap output ── */
+.field-read-content p,
+.pdd-content-container p {
+  font-size: 13.5px;
+  line-height: 1.85;
+  text-align: justify;
+  font-family: 'Inter', sans-serif;
+  color: #44403c;
+  margin: 0 0 12px;
+  padding-left: 12px;
+}
+.field-read-content ol,
+.pdd-content-container ol {
+  padding-left: 28px;
+  margin: 6px 0 12px;
+  list-style-type: decimal;
+}
+
+.field-read-content ul,
+.pdd-content-container ul {
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.field-read-content p:last-child,
+.pdd-content-container p:last-child {
+  margin-bottom: 0;
+}
+
+.field-read-content h4,
+.pdd-content-container h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1a3e74;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 16px 0 6px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.field-read-content ul,
+.pdd-content-container ul {
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+
+.field-read-content li,
+.pdd-content-container li {
+  font-size: 13.5px;
+  font-family: 'Inter', sans-serif;
+  color: #44403c;
+  line-height: 1.8;
+  margin-bottom: 6px;
+}
+
+.field-read-content strong,
+.pdd-content-container strong {
+  font-weight: 700;
+  color: #1c1917;
+}
+
+/* ── Read-mode table — PDF report style ── */
+.field-read-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.field-read-content th {
+  background: #4473C5;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 12px 18px;
+  
+  
+  text-align: center !important;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+}
+.field-read-content th:last-child { border-right: none; }
+
+.field-read-content td {
+  padding: 12px 18px;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+  color: #1a1a2e;
+  font-size: 13px;
+}
+.field-read-content td:last-child { border-right: none; }
+
+.field-read-content tbody tr:nth-child(odd) td { background: #ffffff; }
+.field-read-content tbody tr:nth-child(even) td { background: #D9E1F3; }
+
+/* ═══════════════════════════════════════
+   INLINE FIELD EDITOR  (TipTap wrapper)
+   ═══════════════════════════════════════ */
+.inline-field-editor {
+  margin-top: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(96, 165, 250, 0.45);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.09);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Inline editor toolbar ── */
+.ife-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(231, 229, 228, 0.5);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.ife-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  background: transparent;
+  color: #4b5563;
+}
+
+.ife-btn:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.08);
+  color: #1e40af;
+  transform: scale(1.05);
+}
+
+.ife-btn--active {
+  background: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.35);
+}
+
+.ife-btn--active:hover {
+  background: #2563eb;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.ife-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ife-sep {
+  width: 1px;
+  height: 22px;
+  background: #e5e7eb;
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.ife-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ── Colour swatches ── */
+.ife-color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ife-color-swatch:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.ife-color-remove {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.ife-color-remove:hover {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.ife-file-input {
+  display: none;
+}
+
+/* ── Editor container ── */
+.inline-field-editor {
+  margin-top: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(229, 231, 235, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Editor body — TipTap typography ── */
+.inline-field-editor .ProseMirror {
+  min-height: 100px;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #212529;
+}
+
+.inline-field-editor .ProseMirror p {
+  font-size: 13.5px;
+  line-height: 1.85;
+  text-align: justify;
+  color: #44403c;
+  margin: 0 0 12px;
+  padding-left: 12px;
+}
+
+.inline-field-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #ced4da;
+  font-style: italic;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.inline-field-editor .ProseMirror h4 {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1a3e74;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 16px 0 6px;
+  padding-left: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  text-align: left;  
+}
+
+.inline-field-editor .ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.inline-field-editor .ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 28px;
+  margin: 6px 0 12px;
+}
+.inline-field-editor .ProseMirror li {
+  font-size: 13.5px;
+  color: #44403c;
+  line-height: 1.8;
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+.inline-field-editor .ProseMirror li p {
+  margin: 0;               /* remove extra paragraph margins inside li */
+}
+
+.inline-field-editor .ProseMirror strong { font-weight: 700; color: #1c1917; }
+.inline-field-editor .ProseMirror em {
+  font-style: oblique 14deg !important;
+  color: inherit;
+}
+.field-read-content em,
+.pdd-content-container em {
+  font-style: oblique 14deg !important;
+}
+
+/* ── TipTap table inside inline editor ── */
+.inline-field-editor .ProseMirror table {
+  width: 100%;
+  table-layout:auto;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.inline-field-editor .ProseMirror td:first-child {
+  width: 50px;
+  min-width: 50px;
+  max-width: 50px;
+  text-align: center;
+}
+.inline-field-editor .ProseMirror th {
+  background: #4473C5;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 18px;
+  text-align: center;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+  
+}
+.inline-field-editor .ProseMirror th:last-child { border-right: none; }
+.inline-field-editor .ProseMirror td {
+  padding: 12px 18px;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+  color: #1a1a2e;
+}
+.inline-field-editor .ProseMirror td:last-child { border-right: none; }
+/* Row striping inside the editor — the header row occupies tbody's first
+   slot here (TipTap doesn't split out a <thead>), which shifts data-row
+   parity by one compared to the pre-default tables. Swapped odd/even below
+   so the first data row still renders white and the second gray, matching
+   the default/read-mode tables. */
+.inline-field-editor .ProseMirror tr:nth-child(even) td { background: #fff; }
+.inline-field-editor .ProseMirror tr:nth-child(odd) td  { background: #D9E1F3; }
+
+/* ── Fixes for th > p — must cover BOTH the live editor and the saved read view ── */
+.inline-field-editor .ProseMirror th p,
+.inline-field-editor .ProseMirror th p *,
+.pdd-content th p,
+.pdd-content th p * {
+  color: #ffffff !important;
+  margin: 0;
+  padding-left: 10px;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 6 — PROFILE TABLE OVERRIDES
+   Row-level edit pattern (VillageProfileSection)
+   ═══════════════════════════════════════ */
+
+/* Wrapper so inline editor inside a td doesn't blow the layout */
+.profile-table-cell-editor {
+  min-width: 0;
+}
+
+.profile-table-cell-editor .inline-field-editor {
+  border-radius: 8px;
+  margin-top: 0;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 7 — SUB-SECTION DIVIDER
+   (SocialEnvironmental)
+   ═══════════════════════════════════════ */
+.sec7-subsection-title {
+  font-size: 12.5px;
+  font-weight: 900;
+  color: #00529d;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e8f0fb;
+}
+/* ═══════════════════════════════════════
+   SECTION 6 — VILLAGE PROFILE TABLE
+   Matches the PDF-report table style used
+   in VillageProfile.jsx / VillageProfile.css
+   ═══════════════════════════════════════ */
+
+/* Scroll wrapper */
+.vps-table-wrap {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+/* Table shell */
+.vps-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Header cells ── */
+.vps-th {
+  background: #4473C5;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 14px;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  vertical-align: middle;
+}
+
+.vps-th:last-child {
+  border-right: none;
+}
+
+/* Fixed width for Attribute column */
+.vps-th-attr {
+    height: 68px;
+  width: 280px;
+}
+
+/* ── Row striping (odd = white, even = light blue-grey) ── */
+.vps-tr-odd  > td { background: #ffffff; }
+.vps-tr-even > td { background: #D9E1F3; }
+
+/* ── Attribute (left) cell ── */
+.vps-td-attr {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a3e74;
+  border-top: 3px solid #e2e8f0;
+  border-right: 3px solid #e2e8f0;
+  vertical-align: top;
+  width: 280px;
+  white-space: nowrap;
+}
+
+/* ── Details (right) cell ── */
+.vps-td-details {
+  padding: 12px 18px;
+  font-size: 13px;
+  color: #1a1a2e;
+  border-top: 3px solid #e2e8f0;
+  vertical-align: top;
+}
+
+/* ── Read-mode layout inside details cell ── */
+.vps-details-read {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.vps-details-text {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #1a1a2e;
+}
+
+/* Tighten paragraph margins when the cell only has plain text */
+.vps-details-text p {
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  text-align: left !important;
+  color: #1a1a2e !important;
+}
+
+/* Edit button — keep it pinned right and not wrapping */
+.vps-edit-btn {
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+.village-satellite-image {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.village-satellite-image img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+/* ── Village satellite image sizing ── */
+.field-read-content img,
+.inline-field-editor .ProseMirror img,
+.tiptap-simple .ProseMirror img {
+  width: auto;
+  max-width: 95%;
+  height: auto;
+  display: block;
+  margin: 16px auto;
+  border-radius: 4px;
+}
+.field-read-content strong,
+.pdd-content-container strong {
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.field-read-content em,
+.pdd-content-container em {
+  font-style: italic;
+}
+
+/* ── Project Summary table – narrow first column ── */
+/* ── Project Summary table — force narrow, centered number column ── */
+.project-summary-table td:first-child,
+.pdd-content-container .project-summary-table td:first-child,
+.field-read-content .project-summary-table td:first-child {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  text-align: center !important;
+  padding: 14px 8px !important;
+  font-weight: 700;
+  color: #1a3e74;
+  white-space: nowrap;
+}
+
+/* ── Cost Detail table — grand-total rows merge the first 4 columns; ── */
+/* ── override the narrow 40px first-column rule so they can span full width ── */
+.cost-detail-table td.cdt-span-cell,
+.pdd-content-container .cost-detail-table td.cdt-span-cell,
+.field-read-content .cost-detail-table td.cdt-span-cell {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  white-space: normal !important;
+}
+
+/* ── Override editor table styles for Section 6 (Village Profile) ── */
+.pdd-content-container .inline-field-editor .ProseMirror th {
+  padding: 14px 20px !important;      /* match read-mode */
+  font-size: 13px !important;         /* match read-mode */
+  text-align: left !important;        /* match read-mode */
+}
+
+.pdd-content-container .inline-field-editor .ProseMirror td {
+  padding: 14px 20px !important;      /* match read-mode */
+}
+
+.pdd-content-container .inline-field-editor .ProseMirror td:first-child {
+  width: 280px !important;
+  min-width: 280px !important;
+  text-align: left !important;        /* remove the centering */
+}
+
+/* Ensure the table structure itself stays consistent */
+.pdd-content-container .inline-field-editor .ProseMirror table {
+  border-collapse: collapse;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* ── Make read‑mode tables consistent, whether text is direct or wrapped in <p> ── */
+
+/* 1. First column: fixed width + left alignment (matches default table) */
+.field-read-content td:first-child,
+.pdd-content-container td:first-child {
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  text-align: left !important;
+  font-weight: 700;
+  color: #1a3e74;
+  border-right: 1px solid #e2e8f0;
+  white-space: normal;      /* allow wrapping if needed */
+}
+
+/* 2. Reset any <p> inside table cells to avoid extra spacing */
+.field-read-content td p,
+.pdd-content-container td p,
+.field-read-content th p,
+.pdd-content-container th p {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  text-align: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* 3. Ensure header cells are consistently styled */
+.field-read-content th,
+.pdd-content-container th {
+  padding: 14px 20px !important;   /* match default table padding */
+  font-size: 13px !important;
+  text-align: left !important;
+  background: #4473C5 !important;
+  color: #ffffff !important;
+}
+
+/* 4. Ensure all data cells have consistent padding */
+.field-read-content td,
+.pdd-content-container td {
+  padding: 14px 20px !important;
+  font-size: 13px !important;
+  vertical-align: top;
+  border-top: 1px solid #e2e8f0;
+}
+.pdd-content-container .project-summary-table th {
+  text-align: center !important;
+}
+.pdd-content-container .inline-field-editor .ProseMirror table.project-summary-table th {
+  text-align: center !important;
+}
+.pdd-content-container th[colspan="3"],
+.pdd-content-container th[colspan="3"] p {
+  text-align: center !important;
+}
