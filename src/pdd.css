@@ -1,0 +1,17 @@
+/* Tables – PDF‑report style */
+.pdd-content-container table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 14px 0;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    outline: 10px solid red;
+}
+
+
+.pdd-content-container .project-summary-table th {
+    text-align: center !important;
+}

@@ -26,6 +26,7 @@ import { useLLMGenerate } from "./hooks/useLLMGenerate";
 import { MapPin, ChevronDown } from "lucide-react";
 import { VILLAGES, TABS, VILLAGE_ID_MAP } from "./data/pddStructure";
 import "./styles.css";
+import "./pdd.css";
 
 export default function App() {
   const [selectedVillage, setSelectedVillage] = useState("");
